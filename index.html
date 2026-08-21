@@ -496,14 +496,15 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
 <div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
   <div class="contact-panel">
     <h3 id="contact-title">联系管理员</h3>
-    <p>当前浏览器可能拦截 QQ 唤起。请复制 QQ 号后在 QQ 中搜索添加，或尝试下方入口打开。</p>
+    <p>部分浏览器会拦截 QQ 唤起，且临时会话需要 QQ 账号允许。推荐先复制 QQ 号，再尝试临时会话或添加好友。</p>
     <div class="qq-number">460290139</div>
     <div class="contact-actions">
       <button class="contact-action primary" type="button" onclick="copyContactQQ()">复制QQ号</button>
-      <button class="contact-action" type="button" onclick="openQQNow()">打开QQ</button>
+      <button class="contact-action" type="button" onclick="openQQChat()">临时会话</button>
+      <button class="contact-action" type="button" onclick="openQQCard()">添加好友</button>
       <a class="contact-action" href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank">网页版</a>
-      <button class="contact-action" type="button" onclick="hideContact()">关闭</button>
     </div>
+    <button class="contact-close" type="button" onclick="hideContact()">关闭</button>
   </div>
 </div>
 
@@ -567,24 +568,34 @@ function copyContactQQ(silent){
   }
   return ok;
 }
-function openQQNow(){
+function openQQChat(){
   copyContactQQ(true);
-  openQQ({preventDefault:function(){}});
+  openQQ({preventDefault:function(){}}, 'chat');
 }
-function openQQ(e){
+function openQQCard(){
+  copyContactQQ(true);
+  openQQ({preventDefault:function(){}}, 'card');
+}
+function openQQ(e, mode){
   if(e && e.preventDefault) e.preventDefault();
   var uin = QQ_UIN;
   var web = 'https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes';
-  var mobileQQ = 'mqq://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web';
+  var mobileQQ = 'mqqwpa://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com';
   var desktopQQ = 'tencent://message/?uin=' + uin + '&site=qq&menu=yes';
+  var cardQQ = 'mqq://card/show_pslcard?src_type=internal&version=1&uin=' + uin + '&card_type=person&source=sharecard';
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
   var isIOS = /iPhone|iPad|iPod/i.test(ua);
   var launchUrl = desktopQQ;
   var copied = copyQQ(uin);
 
-  if(isAndroid){
-    launchUrl = 'intent://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web#Intent;scheme=mqq;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
+  if(mode === 'card'){
+    launchUrl = cardQQ;
+    if(isAndroid){
+      launchUrl = 'intent://card/show_pslcard?src_type=internal&version=1&uin=' + uin + '&card_type=person&source=sharecard#Intent;scheme=mqq;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
+    }
+  }else if(isAndroid){
+    launchUrl = 'intent://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com#Intent;scheme=mqqwpa;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
   }else if(isIOS){
     launchUrl = mobileQQ;
   }
