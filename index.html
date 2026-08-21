@@ -82,6 +82,10 @@ nav .nav-links a:hover { color: #2563eb; }
 .download-card .dl-btn { padding: 12px 28px; background: #2563eb; color: #fff; border-radius: 12px; font-size: 14px; font-weight: 600; transition: all 0.2s; flex-shrink: 0; }
 .download-card .dl-btn:hover { background: #1d4ed8; transform: scale(1.03); }
 .download-note { text-align: center; color: #94a3b8; font-size: 13px; margin-top: 24px; }
+.activation-box { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 28px; }
+.activation-label { font-size: 14px; color: #64748b; }
+.copy-btn { padding: 8px 20px; background: #f1f5f9; color: #2563eb; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.copy-btn:hover { background: #eff6ff; border-color: #2563eb; }
 
 /* Footer */
 footer { border-top: 1px solid #e2e8f0; padding: 48px 24px 32px; }
@@ -256,12 +260,16 @@ footer .copyright { font-size: 13px; color: #94a3b8; }
           </div>
           <div class="text">
             <h4>冥城应用商店</h4>
-            <div class="meta">车机版 &middot; 公签加固版 &middot; 最新构建 &middot; ~22MB</div>
+            <div class="meta">车机版 &middot; 公签加固版 &middot; CDN 加速下载 &middot; ~22MB</div>
           </div>
         </div>
         <a href="https://cdn.jsdelivr.net/gh/NJS98-UI/appstore-data@main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店.apk">下载</a>
       </div>
-      <p class="download-note">如有疑问或获取激活码，请咨询管理员</p>
+      <div class="activation-box">
+        <span class="activation-label">获取激活码</span>
+        <button class="copy-btn" id="copyQqBtn" onclick="copyContact()">复制联系账号</button>
+      </div>
+      <p class="download-note">激活需要使用激活码，下载后请联系管理员完成激活</p>
     </div>
   </div>
 </section>
@@ -277,5 +285,33 @@ footer .copyright { font-size: 13px; color: #94a3b8; }
   </div>
 </footer>
 
-</body>
+<script>
+function copyContact() {
+  var text = '460290139';
+  var btn = document.getElementById('copyQqBtn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = '已复制';
+      btn.style.background = '#dcfce7';
+      btn.style.color = '#16a34a';
+      btn.style.borderColor = '#bbf7d0';
+      setTimeout(function() {
+        btn.textContent = '复制联系账号';
+        btn.style.background = '#f1f5f9';
+        btn.style.color = '#2563eb';
+        btn.style.borderColor = '#e2e8f0';
+      }, 2000);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '已复制';
+    setTimeout(function() { btn.textContent = '复制联系账号'; }, 2000);
+  }
+}
+</script>
 </html>
