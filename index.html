@@ -37,13 +37,13 @@ a { color: var(--brand); text-decoration: none; }
 /* ============ Nav ============ */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.8);
+  background: rgba(15,23,42,0.85);
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid rgba(226,232,240,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 nav .inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-nav .logo { display: flex; align-items: center; gap: 11px; font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.2px; }
+nav .logo { display: flex; align-items: center; gap: 11px; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.2px; }
 nav .logo .logo-mark {
   width: 36px; height: 36px; border-radius: 10px;
   background: linear-gradient(135deg, #6366f1, #2563eb);
@@ -52,16 +52,8 @@ nav .logo .logo-mark {
 }
 nav .logo .logo-mark svg { width: 20px; height: 20px; fill: #fff; }
 nav .nav-links { display: flex; align-items: center; gap: 36px; }
-nav .nav-links a { font-size: 14px; color: var(--ink-3); font-weight: 500; transition: color .2s; }
-nav .nav-links a:hover { color: var(--ink); }
-nav .nav-cta {
-  padding: 9px 22px; border-radius: 999px;
-  background: linear-gradient(135deg, #6366f1, #2563eb);
-  color: #fff; font-size: 14px; font-weight: 600;
-  box-shadow: 0 4px 16px rgba(79,70,229,0.35);
-  transition: transform .2s, box-shadow .2s;
-}
-nav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79,70,229,0.45); color: #fff; }
+nav .nav-links a { font-size: 14px; color: rgba(255,255,255,0.65); font-weight: 500; transition: color .2s; }
+nav .nav-links a:hover { color: #fff; }
 
 /* ============ Hero ============ */
 .hero { position: relative; overflow: hidden; padding: 120px 24px 110px; text-align: center; }
@@ -94,9 +86,6 @@ nav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(79
 .hero h1 .grad {
   background: linear-gradient(120deg, #6366f1 0%, #2563eb 55%, #0ea5e9 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-}
-.hero .subtitle {
-  font-size: 19px; color: var(--ink-3); max-width: 640px; margin: 0 auto 42px; line-height: 1.75;
 }
 .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .btn {
@@ -285,7 +274,6 @@ footer .copyright { font-size: 13px; color: var(--ink-4); }
 @media (max-width: 680px) {
   .hero { padding: 80px 18px 70px; }
   .hero h1 { font-size: 34px; letter-spacing: -1px; }
-  .hero .subtitle { font-size: 16px; }
   nav .nav-links { display: none; }
   .features-grid { grid-template-columns: 1fr; }
   .usage-steps { flex-direction: column; gap: 36px; max-width: 300px; }
@@ -316,7 +304,6 @@ footer .copyright { font-size: 13px; color: var(--ink-4); }
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
     </div>
-    <a href="#download" class="nav-cta">立即下载</a>
   </div>
 </nav>
 
@@ -331,7 +318,6 @@ footer .copyright { font-size: 13px; color: var(--ink-4); }
   <div class="container inner">
     <div class="hero-tag reveal d1">为每一次出行提供更丰富的车机体验</div>
     <h1 class="reveal d2">让车机更聪明，<br><span class="grad">让旅途更精彩</span></h1>
-    <p class="subtitle reveal d3">冥城应用商店为车机提供精选应用、免费娱乐资源、手机互联与多功能工具，激活即享完整服务。</p>
     <div class="hero-buttons reveal d3">
       <a href="#download" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
