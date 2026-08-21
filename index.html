@@ -248,6 +248,18 @@ nav .links a:hover{color:var(--ink-2)}
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* Contact modal */
+.contact-modal{position:fixed;inset:0;z-index:260;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,0.28);backdrop-filter:blur(10px)}
+.contact-modal.show{display:flex}
+.contact-panel{width:min(420px,92vw);background:#fff;border-radius:18px;padding:26px 24px;text-align:center;box-shadow:0 24px 80px rgba(15,23,42,0.22)}
+.contact-panel h3{font-size:20px;color:var(--ink);margin-bottom:8px}
+.contact-panel p{font-size:14px;color:var(--ink-3);line-height:1.7;margin-bottom:18px}
+.qq-number{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 18px;border-radius:12px;background:var(--brand-bg);color:var(--brand);font-size:20px;font-weight:800;letter-spacing:1px;margin-bottom:18px}
+.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.contact-action{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:14px;font-weight:700;cursor:pointer}
+.contact-action.primary{background:linear-gradient(135deg,#6366f1,#2563eb);border-color:transparent;color:#fff}
+.contact-close{margin-top:12px;background:none;border:none;color:var(--ink-4);font-size:13px;cursor:pointer}
+
 /* Footer */
 footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(28px, 5vw, 44px) clamp(16px, 4vw, 24px) clamp(20px, 3vw, 28px)}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -304,7 +316,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <a href="#features">功能特性</a>
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
-      <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">联系管理员</a>
+      <a href="#contact" onclick="return showContact(event)">联系管理员</a>
     </div>
   </div>
 </nav>
@@ -476,10 +488,24 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
           下载
         </a>
       </div>
-      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a>完成激活</p>
+      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="#contact" onclick="return showContact(event)">管理员</a>完成激活</p>
     </div>
   </div>
 </section>
+
+<div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <div class="contact-panel">
+    <h3 id="contact-title">联系管理员</h3>
+    <p>当前浏览器可能拦截 QQ 唤起。请复制 QQ 号后在 QQ 中搜索添加，或尝试下方入口打开。</p>
+    <div class="qq-number">460290139</div>
+    <div class="contact-actions">
+      <button class="contact-action primary" type="button" onclick="copyContactQQ()">复制QQ号</button>
+      <button class="contact-action" type="button" onclick="openQQNow()">打开QQ</button>
+      <a class="contact-action" href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank">网页版</a>
+      <button class="contact-action" type="button" onclick="hideContact()">关闭</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="container">
@@ -522,6 +548,28 @@ function copyQQ(ui){
     }catch(e){ ok = false; }
   }
   return ok;
+}
+function showContact(e){
+  if(e && e.preventDefault) e.preventDefault();
+  var modal = document.getElementById('contact-modal');
+  if(modal) modal.classList.add('show');
+  copyContactQQ(true);
+  return false;
+}
+function hideContact(){
+  var modal = document.getElementById('contact-modal');
+  if(modal) modal.classList.remove('show');
+}
+function copyContactQQ(silent){
+  var ok = copyQQ(QQ_UIN);
+  if(!silent){
+    toast(ok ? 'QQ号 460290139 已复制' : '请手动复制QQ号 460290139');
+  }
+  return ok;
+}
+function openQQNow(){
+  copyContactQQ(true);
+  openQQ({preventDefault:function(){}});
 }
 function openQQ(e){
   if(e && e.preventDefault) e.preventDefault();
