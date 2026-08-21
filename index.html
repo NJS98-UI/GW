@@ -236,6 +236,18 @@ nav .links a:hover{color:var(--ink-2)}
 .dl-note a{color:var(--ink-3);font-weight:600;transition:color .2s}
 .dl-note a:hover{color:var(--brand)}
 
+/* QQ toast */
+.toast{
+  position:fixed;left:50%;bottom:44px;z-index:300;
+  transform:translateX(-50%) translateY(16px);
+  background:rgba(10,22,40,0.92);color:#fff;
+  padding:11px 20px;border-radius:12px;
+  font-size:13px;line-height:1.5;max-width:min(86vw,420px);text-align:center;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);backdrop-filter:blur(8px);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
 /* Footer */
 footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(28px, 5vw, 44px) clamp(16px, 4vw, 24px) clamp(20px, 3vw, 28px)}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -292,7 +304,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <a href="#features">功能特性</a>
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
-      <a href="tencent://message/?uin=460290139&site=qq&menu=yes">联系管理员</a>
+      <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">联系管理员</a>
     </div>
   </div>
 </nav>
@@ -464,7 +476,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
           下载
         </a>
       </div>
-      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="tencent://message/?uin=460290139&site=qq&menu=yes">管理员</a>完成激活</p>
+      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a>完成激活</p>
     </div>
   </div>
 </section>
@@ -485,6 +497,64 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
 </footer>
 
 <script>
+var QQ_UIN = '460290139';
+function toast(msg){
+  var t = document.getElementById('_qq_toast');
+  if(!t){ t=document.createElement('div'); t.id='_qq_toast'; t.className='toast'; document.body.appendChild(t); }
+  t.textContent = msg;
+  void t.offsetWidth;
+  t.classList.add('show');
+  clearTimeout(t._tm);
+  t._tm = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+}
+function copyQQ(ui){
+  var ok = false;
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(ui); ok = true; }
+  }catch(e){ ok = false; }
+  if(!ok){
+    try{
+      var ta = document.createElement('textarea');
+      ta.value = ui; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+    }catch(e){ ok = false; }
+  }
+  return ok;
+}
+function openQQ(e){
+  if(e && e.preventDefault) e.preventDefault();
+  var uin = QQ_UIN;
+  var schemes = [
+    'mqq://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web',
+    'tencent://message/?uin=' + uin + '&site=qq&menu=yes'
+  ];
+  var fired = false;
+  var onHide = function(){ fired = true; };
+  document.addEventListener('visibilitychange', onHide);
+  window.addEventListener('pagehide', onHide);
+  window.addEventListener('blur', onHide);
+  setTimeout(function(){
+    document.removeEventListener('visibilitychange', onHide);
+    window.removeEventListener('pagehide', onHide);
+    window.removeEventListener('blur', onHide);
+    if(!fired){
+      var copied = copyQQ(uin);
+      var w = window.open('https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes', '_blank');
+      toast(copied
+        ? '未能唤起QQ，已复制QQ号 ' + uin + '，请到QQ中搜索添加'
+        : '未能唤起QQ，请手动添加QQ号 ' + uin);
+    }
+  }, 1200);
+  schemes.forEach(function(url){
+    var f = document.createElement('iframe');
+    f.style.cssText = 'display:none;width:0;height:0;border:0;';
+    f.src = url;
+    document.body.appendChild(f);
+  });
+  return false;
+}
 document.getElementById('year').textContent = new Date().getFullYear();
 document.querySelectorAll('.rl').forEach(function(el, i){setTimeout(function(){el.classList.add('show')}, i*80)});
 </script>
