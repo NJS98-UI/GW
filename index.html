@@ -236,30 +236,6 @@ nav .links a:hover{color:var(--ink-2)}
 .dl-note a{color:var(--ink-3);font-weight:600;transition:color .2s}
 .dl-note a:hover{color:var(--brand)}
 
-/* QQ toast */
-.toast{
-  position:fixed;left:50%;bottom:44px;z-index:300;
-  transform:translateX(-50%) translateY(16px);
-  background:rgba(10,22,40,0.92);color:#fff;
-  padding:11px 20px;border-radius:12px;
-  font-size:13px;line-height:1.5;max-width:min(86vw,420px);text-align:center;
-  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.18);backdrop-filter:blur(8px);
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* Contact modal */
-.contact-modal{position:fixed;inset:0;z-index:260;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,0.28);backdrop-filter:blur(10px)}
-.contact-modal.show{display:flex}
-.contact-panel{width:min(420px,92vw);background:#fff;border-radius:18px;padding:26px 24px;text-align:center;box-shadow:0 24px 80px rgba(15,23,42,0.22)}
-.contact-panel h3{font-size:20px;color:var(--ink);margin-bottom:8px}
-.contact-panel p{font-size:14px;color:var(--ink-3);line-height:1.7;margin-bottom:18px}
-.qq-number{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 18px;border-radius:12px;background:var(--brand-bg);color:var(--brand);font-size:20px;font-weight:800;letter-spacing:1px;margin-bottom:18px}
-.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
-.contact-action{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:14px;font-weight:700;cursor:pointer}
-.contact-action.primary{background:linear-gradient(135deg,#6366f1,#2563eb);border-color:transparent;color:#fff}
-.contact-close{margin-top:12px;background:none;border:none;color:var(--ink-4);font-size:13px;cursor:pointer}
-
 /* Footer */
 footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(28px, 5vw, 44px) clamp(16px, 4vw, 24px) clamp(20px, 3vw, 28px)}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -316,7 +292,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <a href="#features">功能特性</a>
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
-      <a href="#contact" onclick="return showContact(event)">联系管理员</a>
+      <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">联系管理员</a>
     </div>
   </div>
 </nav>
@@ -488,25 +464,10 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
           下载
         </a>
       </div>
-      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="#contact" onclick="return showContact(event)">管理员</a>完成激活</p>
+      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a>完成激活</p>
     </div>
   </div>
 </section>
-
-<div class="contact-modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
-  <div class="contact-panel">
-    <h3 id="contact-title">联系管理员</h3>
-    <p>部分浏览器会拦截 QQ 唤起，且临时会话需要 QQ 账号允许。推荐先复制 QQ 号，再尝试临时会话或添加好友。</p>
-    <div class="qq-number">460290139</div>
-    <div class="contact-actions">
-      <button class="contact-action primary" type="button" onclick="copyContactQQ()">复制QQ号</button>
-      <button class="contact-action" type="button" onclick="openQQChat()">临时会话</button>
-      <button class="contact-action" type="button" onclick="openQQCard()">添加好友</button>
-      <a class="contact-action" href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank">网页版</a>
-    </div>
-    <button class="contact-close" type="button" onclick="hideContact()">关闭</button>
-  </div>
-</div>
 
 <footer>
   <div class="container">
@@ -525,15 +486,6 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
 
 <script>
 var QQ_UIN = '460290139';
-function toast(msg){
-  var t = document.getElementById('_qq_toast');
-  if(!t){ t=document.createElement('div'); t.id='_qq_toast'; t.className='toast'; document.body.appendChild(t); }
-  t.textContent = msg;
-  void t.offsetWidth;
-  t.classList.add('show');
-  clearTimeout(t._tm);
-  t._tm = setTimeout(function(){ t.classList.remove('show'); }, 3200);
-}
 function copyQQ(ui){
   var ok = false;
   try{
@@ -550,51 +502,19 @@ function copyQQ(ui){
   }
   return ok;
 }
-function showContact(e){
-  if(e && e.preventDefault) e.preventDefault();
-  var modal = document.getElementById('contact-modal');
-  if(modal) modal.classList.add('show');
-  copyContactQQ(true);
-  return false;
-}
-function hideContact(){
-  var modal = document.getElementById('contact-modal');
-  if(modal) modal.classList.remove('show');
-}
-function copyContactQQ(silent){
-  var ok = copyQQ(QQ_UIN);
-  if(!silent){
-    toast(ok ? 'QQ号 460290139 已复制' : '请手动复制QQ号 460290139');
-  }
-  return ok;
-}
-function openQQChat(){
-  copyContactQQ(true);
-  openQQ({preventDefault:function(){}}, 'chat');
-}
-function openQQCard(){
-  copyContactQQ(true);
-  openQQ({preventDefault:function(){}}, 'card');
-}
-function openQQ(e, mode){
+function openQQ(e){
   if(e && e.preventDefault) e.preventDefault();
   var uin = QQ_UIN;
   var web = 'https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes';
   var mobileQQ = 'mqqwpa://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com';
   var desktopQQ = 'tencent://message/?uin=' + uin + '&site=qq&menu=yes';
-  var cardQQ = 'mqq://card/show_pslcard?src_type=internal&version=1&uin=' + uin + '&card_type=person&source=sharecard';
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
   var isIOS = /iPhone|iPad|iPod/i.test(ua);
   var launchUrl = desktopQQ;
-  var copied = copyQQ(uin);
+  copyQQ(uin);
 
-  if(mode === 'card'){
-    launchUrl = cardQQ;
-    if(isAndroid){
-      launchUrl = 'intent://card/show_pslcard?src_type=internal&version=1&uin=' + uin + '&card_type=person&source=sharecard#Intent;scheme=mqq;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
-    }
-  }else if(isAndroid){
+  if(isAndroid){
     launchUrl = 'intent://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com#Intent;scheme=mqqwpa;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
   }else if(isIOS){
     launchUrl = mobileQQ;
@@ -618,10 +538,7 @@ function openQQ(e, mode){
   fallbackTimer = setTimeout(function(){
     cleanup();
     if(!fired){
-      toast(copied
-        ? '未能直接唤起QQ，已复制QQ号 ' + uin + '，正在打开网页版'
-        : '未能唤起QQ，请手动添加QQ号 ' + uin);
-      setTimeout(function(){ window.location.href = web; }, 700);
+      window.location.href = web;
     }
   }, 1500);
   window.location.href = launchUrl;
