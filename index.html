@@ -202,12 +202,35 @@ footer p { color: #94a3b8; font-size: 13px; }
           <h4>冥城应用商店</h4>
           <div class="meta">车机版 &middot; 公签加固版 &middot; 最新构建 &middot; ~22MB</div>
         </div>
-        <a href="https://cdn.jsdelivr.net/gh/NJS98-UI/appstore-data@main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" target="_blank">下载</a>
-      </div>
+<a href="javascript:void(0)" class="dl-btn" onclick="downloadApk()">下载</a>
     </div>
-    <p class="download-note">如有疑问或获取激活码，请咨询管理员</p>
   </div>
+  <p class="download-note">如有疑问或获取激活码，请咨询管理员</p>
+</div>
 </section>
+
+<script>
+function downloadApk() {
+  var btn = event.target;
+  btn.textContent = '下载中...';
+  fetch('https://cdn.jsdelivr.net/gh/NJS98-UI/appstore-data@main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk')
+    .then(function(r) { return r.blob(); })
+    .then(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = '冥城应用商店.apk';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      btn.textContent = '下载';
+    })
+    .catch(function() {
+      btn.textContent = '下载失败，请重试';
+    });
+}
+</script>
 
 <footer>
   <p>&copy; 2026 冥城应用商店</p>
