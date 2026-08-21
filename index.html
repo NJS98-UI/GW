@@ -526,33 +526,46 @@ function copyQQ(ui){
 function openQQ(e){
   if(e && e.preventDefault) e.preventDefault();
   var uin = QQ_UIN;
-  var schemes = [
-    'mqq://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web',
-    'tencent://message/?uin=' + uin + '&site=qq&menu=yes'
-  ];
+  var web = 'https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes';
+  var mobileQQ = 'mqq://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web';
+  var desktopQQ = 'tencent://message/?uin=' + uin + '&site=qq&menu=yes';
+  var ua = navigator.userAgent || '';
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var launchUrl = desktopQQ;
+  var copied = copyQQ(uin);
+
+  if(isAndroid){
+    launchUrl = 'intent://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web#Intent;scheme=mqq;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
+  }else if(isIOS){
+    launchUrl = mobileQQ;
+  }
+
   var fired = false;
-  var onHide = function(){ fired = true; };
-  document.addEventListener('visibilitychange', onHide);
-  window.addEventListener('pagehide', onHide);
-  window.addEventListener('blur', onHide);
-  setTimeout(function(){
+  var fallbackTimer;
+  var cleanup = function(){
     document.removeEventListener('visibilitychange', onHide);
     window.removeEventListener('pagehide', onHide);
     window.removeEventListener('blur', onHide);
+  };
+  var onHide = function(){
+    fired = true;
+    clearTimeout(fallbackTimer);
+    cleanup();
+  };
+  document.addEventListener('visibilitychange', onHide);
+  window.addEventListener('pagehide', onHide);
+  window.addEventListener('blur', onHide);
+  fallbackTimer = setTimeout(function(){
+    cleanup();
     if(!fired){
-      var copied = copyQQ(uin);
-      var w = window.open('https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes', '_blank');
       toast(copied
-        ? '未能唤起QQ，已复制QQ号 ' + uin + '，请到QQ中搜索添加'
+        ? '未能直接唤起QQ，已复制QQ号 ' + uin + '，正在打开网页版'
         : '未能唤起QQ，请手动添加QQ号 ' + uin);
+      setTimeout(function(){ window.location.href = web; }, 700);
     }
-  }, 1200);
-  schemes.forEach(function(url){
-    var f = document.createElement('iframe');
-    f.style.cssText = 'display:none;width:0;height:0;border:0;';
-    f.src = url;
-    document.body.appendChild(f);
-  });
+  }, 1500);
+  window.location.href = launchUrl;
   return false;
 }
 document.getElementById('year').textContent = new Date().getFullYear();
