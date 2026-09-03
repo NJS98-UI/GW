@@ -237,6 +237,27 @@ nav .links a:hover{color:var(--ink-2)}
 .dl-note a{color:var(--ink-3);font-weight:600;transition:color .2s}
 .dl-note a:hover{color:var(--brand)}
 
+/* Tool guide */
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,24px);max-width:960px;margin:0 auto}
+.guide-card{
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:clamp(14px,2.4vw,18px);text-align:center;transition:all .3s;
+}
+.guide-card:hover{border-color:var(--brand);box-shadow:0 10px 30px rgba(79,70,229,0.1);transform:translateY(-4px)}
+.guide-card img{width:100%;display:block;border-radius:clamp(10px,1.8vw,14px);box-shadow:0 4px 16px rgba(15,23,42,0.1)}
+.guide-card h3{font-size:clamp(15px,2.2vw,17px);font-weight:800;color:var(--ink);margin:clamp(14px,2.4vw,18px) 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.guide-card .gnum{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;
+}
+.guide-card p{font-size:clamp(12.5px,1.8vw,13.5px);color:var(--ink-3);line-height:1.8;text-align:left}
+@media(max-width:760px){
+  .guide-grid{grid-template-columns:1fr;max-width:330px}
+  .guide-card p{text-align:center}
+}
+
 /* Footer */
 footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(28px, 5vw, 44px) clamp(16px, 4vw, 24px) clamp(20px, 3vw, 28px)}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -293,6 +314,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <a href="#features">功能特性</a>
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
+      <a href="#tool-guide">安装工具</a>
       <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">联系管理员</a>
     </div>
   </div>
@@ -484,9 +506,52 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
           下载
         </a>
       </div>
+      <div class="dl-row">
+        <div class="info">
+          <div class="app-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+          </div>
+          <div class="text">
+            <h4>冥城车机助手·安装工具</h4>
+            <div class="meta">手机端 &middot; 无线连接车机 &middot; 远程安装应用</div>
+          </div>
+        </div>
+        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E8%BD%A6%E6%9C%BA%E5%8A%A9%E6%89%8B.apk" class="dl-btn" download="冥城车机助手.apk">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          下载
+        </a>
+      </div>
       <p class="dl-note">激活需要使用激活码，下载后请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a>完成激活</p>
+      <p class="dl-note" style="margin-top:14px">「车机助手」为手机端安装工具，可将商店应用远程装进车机，详见下方<a href="#tool-guide">使用说明</a></p>
       <p class="dl-note" style="margin-top:14px">「商店预览」为服务器实时预览地址，与商店应用内容同步更新——商店里有什么，这里就有什么。点击上方「商店预览」按钮即可在线体验。</p>
     </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="tool-guide">
+  <div class="container">
+    <div class="section-head rl">
+      <h2>车机助手·安装工具</h2>
+      <p>手机端安装工具，无线连接车机，把商店里的应用一键装进车机</p>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card rl d1">
+        <img src="docs/tool-1-connect.jpg" alt="车机助手连接车机界面" loading="lazy">
+        <h3><span class="gnum">1</span>连接车机</h3>
+        <p>手机与车机连接同一 WiFi，输入车机 IP 地址和端口连接；也支持无线配对、自动发现设备、USB OTG 有线连接。</p>
+      </div>
+      <div class="guide-card rl d2">
+        <img src="docs/tool-2-install.jpg" alt="车机助手车载安装界面" loading="lazy">
+        <h3><span class="gnum">2</span>一键安装</h3>
+        <p>在「安装」页选择本地下载好的商店 APK 推送到车机，也可以直接导出手机上已装的应用安装到车机。</p>
+      </div>
+      <div class="guide-card rl d3">
+        <img src="docs/tool-3-tools.jpg" alt="车机助手工具界面" loading="lazy">
+        <h3><span class="gnum">3</span>玩转工具</h3>
+        <p>无线 ADB 调试、屏幕截图、激活/启动应用、修改 DPI 与分辨率、动画调整等实用功能，深度玩转车机。</p>
+      </div>
+    </div>
+    <p class="dl-note" style="margin-top:32px">配合冥城应用商店使用：先在手机下载商店里的应用安装包，再通过车机助手推送到车机完成安装。遇到问题请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a></p>
   </div>
 </section>
 
@@ -500,6 +565,7 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <a href="#features">功能特性</a>
       <a href="#usage">使用说明</a>
       <a href="#download">下载</a>
+      <a href="#tool-guide">安装工具</a>
     </div>
     <div class="copy">&copy; <span id="year">2026</span> 冥城应用商店</div>
   </div>
