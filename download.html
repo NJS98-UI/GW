@@ -7,15 +7,17 @@
 <meta name="description" content="下载冥城应用商店 — 独立版、应用管家版、车机助手">
 <style>
 :root{
-  --bg:#07070b;--bg2:#0d0d14;--bg3:#111119;
-  --surface:rgba(255,255,255,0.035);--surface2:rgba(255,255,255,0.06);--surface3:rgba(255,255,255,0.09);
-  --ink:#fafafa;--ink2:#d4d4d8;--ink3:#a1a1aa;--ink4:#71717a;--ink5:#52525b;
+  --bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;
+  --surface:rgba(255,255,255,0.65);--surface2:rgba(255,255,255,0.8);--surface3:rgba(255,255,255,0.9);
+  --ink:#0f172a;--ink2:#1e293b;--ink3:#475569;--ink4:#94a3b8;--ink5:#cbd5e1;
   --brand:#6366f1;--brand2:#818cf8;--brand3:#a855f7;--brand4:#c084fc;
-  --brand-grad:linear-gradient(135deg,#6366f1 0%,#a855f7 100%);
-  --line:rgba(255,255,255,0.06);--line2:rgba(255,255,255,0.1);--line3:rgba(255,255,255,0.14);
-  --radius:18px;--radius-sm:12px;--radius-xs:8px;
+  --brand-grad:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);
+  --line:rgba(226,232,240,0.5);--line2:rgba(203,213,225,0.6);--line3:rgba(148,163,184,0.3);
+  --radius:20px;--radius-sm:14px;--radius-xs:10px;
   --container:min(1120px,100%);--nav-h:56px;
   --ease:cubic-bezier(0.16,1,0.3,1);
+  --shadow:0 8px 32px rgba(99,102,241,0.08);
+  --shadow-hover:0 16px 48px rgba(99,102,241,0.15);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -28,14 +30,14 @@ body{
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .container{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,5vw,36px);width:100%}
-::selection{background:rgba(99,102,241,0.3);color:#fff}
+::selection{background:rgba(99,102,241,0.18);color:var(--ink)}
 
-/* Animated mesh background — 3 blurred floating circles */
+/* Animated mesh background — 3 light blurred floating circles */
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-mesh::before,.bg-mesh::after{content:'';position:absolute;border-radius:50%;filter:blur(120px)}
-.bg-mesh::before{width:560px;height:560px;background:rgba(99,102,241,0.18);top:-180px;left:-120px;animation:drift1 24s ease-in-out infinite}
-.bg-mesh::after{width:480px;height:480px;background:rgba(168,85,247,0.14);top:30%;right:-140px;animation:drift2 30s ease-in-out infinite}
-.bg-mesh .b3{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(120px);background:rgba(99,102,241,0.08);bottom:-100px;left:30%;animation:drift1 28s ease-in-out infinite reverse}
+.bg-mesh::before{width:560px;height:560px;background:rgba(129,140,248,0.18);top:-180px;left:-120px;animation:drift1 24s ease-in-out infinite}
+.bg-mesh::after{width:480px;height:480px;background:rgba(192,132,252,0.12);top:30%;right:-140px;animation:drift2 30s ease-in-out infinite}
+.bg-mesh .b3{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(120px);background:rgba(129,140,248,0.08);bottom:-100px;left:30%;animation:drift1 28s ease-in-out infinite reverse}
 @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,40px)}}
 @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,-30px)}}
 
@@ -43,8 +45,8 @@ img{display:block;max-width:100%}
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);
+    linear-gradient(rgba(15,23,42,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(15,23,42,0.025) 1px,transparent 1px);
   background-size:56px 56px;
   mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 30%,transparent 80%);
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,#000 30%,transparent 80%);
@@ -55,21 +57,21 @@ main{position:relative;z-index:1}
 /* Nav — fixed glass */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
-  background:rgba(7,7,11,0.72);backdrop-filter:blur(20px) saturate(1.6);
-  -webkit-backdrop-filter:blur(20px) saturate(1.6);border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(1.8);
+  -webkit-backdrop-filter:blur(20px) saturate(1.8);border-bottom:1px solid var(--line);
 }
 nav .inner{display:flex;align-items:center;justify-content:space-between;height:100%;gap:16px}
 nav .logo{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap;flex-shrink:0;letter-spacing:-0.01em;cursor:pointer}
 nav .logo .mark{
   width:28px;height:28px;border-radius:7px;background:var(--brand-grad);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  box-shadow:0 3px 12px rgba(99,102,241,0.4),inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow:0 3px 12px rgba(99,102,241,0.35),inset 0 1px 0 rgba(255,255,255,0.4);
 }
 nav .logo .mark svg{width:14px;height:14px;fill:#fff}
 nav .links{display:flex;align-items:center;gap:clamp(14px,2.2vw,24px);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:4px 0}
 nav .links::-webkit-scrollbar{display:none}
 nav .links a{font-size:13.5px;color:var(--ink3);font-weight:500;transition:color .2s;white-space:nowrap;flex-shrink:0;cursor:pointer;position:relative}
-nav .links a:hover{color:var(--ink)}
+nav .links a:hover{color:var(--brand)}
 nav .links a::after{content:'';position:absolute;bottom:-6px;left:50%;width:0;height:2px;background:var(--brand2);border-radius:1px;transition:width .25s,left .25s}
 nav .links a:hover::after{width:14px;left:calc(50% - 7px)}
 nav .links a.active{color:var(--ink);font-weight:600}
@@ -80,16 +82,17 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .page-head .pt-badge{
   display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;
   background:var(--surface2);border:1px solid var(--line2);font-size:12.5px;color:var(--ink3);
-  font-weight:500;margin-bottom:24px;backdrop-filter:blur(8px);animation:fadeUp .6s var(--ease) both;
+  font-weight:500;margin-bottom:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fadeUp .6s var(--ease) both;
+  box-shadow:var(--shadow);
 }
-.page-head .pt-badge .dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 6px #34d399;animation:blink 2s ease infinite}
+.page-head .pt-badge .dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 6px rgba(52,211,153,0.6);animation:blink 2s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 .page-head h1{
   font-size:clamp(34px,6.5vw,56px);font-weight:800;line-height:1.1;letter-spacing:clamp(-1.5px,-0.04em,-3px);
   color:var(--ink);margin-bottom:14px;text-wrap:balance;animation:fadeUp .7s var(--ease) .08s both;
 }
 .page-head h1 .grad{
-  background:linear-gradient(135deg,#818cf8 0%,#c084fc 50%,#f472b6 100%);
+  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
 .page-head p{font-size:clamp(15px,2.2vw,18px);color:var(--ink3);max-width:520px;margin:0 auto;line-height:1.7;animation:fadeUp .7s var(--ease) .16s both}
@@ -99,33 +102,33 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .hub{padding:0 0 clamp(56px,8vw,80px)}
 .hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2.5vw,24px);max-width:min(960px,100%);margin:0 auto;animation:fadeUp .7s var(--ease) .24s both}
 
-/* Glassmorphism card */
+/* Glassmorphism card — white frosted */
 .dl-card{
   position:relative;display:flex;flex-direction:column;padding:clamp(22px,3vw,30px);
   border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+  background:var(--surface);
   border:1px solid var(--line2);
-  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
-  box-shadow:0 20px 50px -24px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.06);
-  transition:all .35s var(--ease);
+  backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);
+  box-shadow:var(--shadow);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
 }
-.dl-card::before{
+.dl-card::after{
   content:'';position:absolute;inset:0 0 auto 0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(129,140,248,0.5),transparent);
+  background:linear-gradient(90deg,transparent,rgba(129,140,248,0.55),transparent);
 }
-.dl-card:hover{transform:translateY(-5px);border-color:var(--line3);background:linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03));box-shadow:0 28px 60px -20px rgba(0,0,0,0.7),inset 0 1px 0 rgba(255,255,255,0.08)}
+.dl-card:hover{transform:translateY(-6px);border-color:var(--line3);box-shadow:var(--shadow-hover)}
 
 .dl-card .card-screenshot{
   width:100%;border-radius:14px;overflow:hidden;margin-bottom:clamp(16px,2.5vw,20px);
   border:1px solid var(--line2);background:var(--bg2);
-  box-shadow:0 12px 32px -12px rgba(0,0,0,0.5);
+  box-shadow:0 12px 32px -12px rgba(99,102,241,0.12);
 }
 .dl-card .card-screenshot img{width:100%;display:block}
 
 .dl-card .card-icon-big{
   width:clamp(76px,10vw,96px);aspect-ratio:1;border-radius:22px;margin:0 auto clamp(16px,2.5vw,20px);
   display:flex;align-items:center;justify-content:center;position:relative;
-  box-shadow:0 14px 36px -6px rgba(139,92,246,0.4),inset 0 1px 0 rgba(255,255,255,0.25);
+  box-shadow:0 14px 36px -6px rgba(139,92,246,0.35),inset 0 1px 0 rgba(255,255,255,0.4);
 }
 .dl-card .card-icon-big svg{width:clamp(38px,5vw,48px);height:clamp(38px,5vw,48px);fill:#fff}
 
@@ -138,21 +141,21 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
   font-size:clamp(15px,2vw,16px);font-weight:600;color:#fff;border:none;cursor:pointer;
   transition:transform .25s var(--ease),box-shadow .25s var(--ease),filter .25s;
 }
-.dl-card .dl-btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.dl-card .dl-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
 .dl-card .dl-btn svg{width:20px;height:20px;flex-shrink:0;fill:currentColor}
 
 .dl-card .dl-note{margin-top:14px;font-size:clamp(12px,1.6vw,13px);color:var(--ink4);text-align:center}
 .dl-card .dl-note a{color:var(--ink3);font-weight:600;cursor:pointer;transition:color .2s}
 .dl-card .dl-note a:hover{color:var(--brand2)}
 
-/* QR Modal — white bg padding for QR image */
-.qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
+/* QR Modal — dark overlay + white box */
+.qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(15,23,42,0.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
 .qr-modal.show{display:flex;animation:fadeIn .25s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .qr-box{
   background:var(--bg2);border:1px solid var(--line2);border-radius:20px;
   padding:clamp(24px,4vw,36px);text-align:center;max-width:320px;width:100%;
-  box-shadow:0 28px 64px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow:0 28px 64px rgba(15,23,42,0.25),0 8px 24px rgba(99,102,241,0.08);
   animation:slideUp .35s var(--ease);
 }
 @keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -160,8 +163,8 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .qr-box .qr-hint{font-size:13.5px;color:var(--ink3);margin-bottom:22px}
 .qr-box .qr-img{width:min(200px,60vw);margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#fff;padding:8px}
 .qr-box .qr-img img{width:100%;display:block;border-radius:8px}
-.qr-box .qr-tip{margin-top:16px;font-size:12.5px;color:var(--brand2);font-weight:600}
-.qr-box .qr-close{margin-top:22px;padding:11px 26px;background:var(--surface);border:1px solid var(--line2);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .2s}
+.qr-box .qr-tip{margin-top:16px;font-size:12.5px;color:var(--brand);font-weight:600}
+.qr-box .qr-close{margin-top:22px;padding:11px 26px;background:var(--bg3);border:1px solid var(--line2);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .2s}
 .qr-box .qr-close:hover{background:var(--surface2);border-color:var(--line3)}
 
 @media(max-width:640px){.hub-grid{grid-template-columns:1fr;max-width:420px}}
@@ -181,6 +184,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
     <div class="links">
       <a href="index.html">首页</a>
       <a href="features.html">功能特性</a>
+      <a href="tools.html">所需工具</a>
       <a href="tutorial.html">安装教程</a>
       <a href="download.html" class="active">下载</a>
       <a href="javascript:void(0)" onclick="showQR()">联系管理员</a>
@@ -208,7 +212,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
         </div>
         <h3>冥城应用商店·独立版</h3>
         <div class="meta">独立商店 · 自动更新</div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店-独立版.apk" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);box-shadow:0 8px 32px rgba(37,99,235,0.35),inset 0 1px 0 rgba(255,255,255,0.2)">
+        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店-独立版.apk" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);box-shadow:0 8px 32px rgba(37,99,235,0.35),inset 0 1px 0 rgba(255,255,255,0.25)">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           下载 APK
         </a>
@@ -221,7 +225,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
         </div>
         <h3>冥城应用商店·应用管家版</h3>
         <div class="meta">车机版 · 最新版本</div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店.apk" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 8px 32px rgba(99,102,241,0.35),inset 0 1px 0 rgba(255,255,255,0.2)">
+        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店.apk" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 8px 32px rgba(99,102,241,0.35),inset 0 1px 0 rgba(255,255,255,0.25)">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           下载 APK
         </a>
@@ -234,7 +238,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
         </div>
         <h3>冥城车机助手</h3>
         <div class="meta">手机端 · 远程安装</div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E8%BD%A6%E6%9C%BA%E5%8A%A9%E6%89%8B.apk" class="dl-btn" download="冥城车机助手.apk" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);box-shadow:0 8px 32px rgba(139,92,246,0.35),inset 0 1px 0 rgba(255,255,255,0.2)">
+        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E8%BD%A6%E6%9C%BA%E5%8A%A9%E6%89%8B.apk" class="dl-btn" download="冥城车机助手.apk" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);box-shadow:0 8px 32px rgba(139,92,246,0.35),inset 0 1px 0 rgba(255,255,255,0.25)">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           下载 APK
         </a>
