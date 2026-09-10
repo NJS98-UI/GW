@@ -18,13 +18,10 @@
   --brand-bg: #eef2ff;
   --line: rgba(226,232,240,0.6);
   --radius: 16px;
-  --h1: clamp(34px, 6.5vw, 64px);
-  --h2: clamp(26px, 4vw, 38px);
-  --pad-section: clamp(64px, 10vw, 100px);
   --container: min(1060px, 100%);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
   color:var(--ink-2);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;
@@ -63,7 +60,7 @@ nav .links{
 nav .links::-webkit-scrollbar{display:none}
 nav .links a{
   font-size:clamp(11.5px, 2.4vw, 13px);
-  color:var(--ink-3);font-weight:500;transition:color .2s;white-space:nowrap;flex-shrink:0;
+  color:var(--ink-3);font-weight:500;transition:color .2s;white-space:nowrap;flex-shrink:0;cursor:pointer;
 }
 nav .links a:hover{color:var(--ink-2)}
 
@@ -72,6 +69,8 @@ nav .links a:hover{color:var(--ink-2)}
   position:relative;overflow:hidden;text-align:center;
   padding:clamp(80px, 14vh, 130px) 0 clamp(50px, 7vw, 80px);
   background:linear-gradient(180deg,#f4f6fe 0%,#ebefff 25%,#ffffff 60%);
+  min-height:calc(100vh - 58px);min-height:calc(100dvh - 58px);
+  display:flex;flex-direction:column;justify-content:center;
 }
 .hero .glow{
   position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;
@@ -79,7 +78,7 @@ nav .links a:hover{color:var(--ink-2)}
 .hero .glow-1{width:min(600px,80vw);aspect-ratio:1;background:rgba(199,210,254,0.5);top:-300px;left:-100px}
 .hero .glow-2{width:min(500px,70vw);aspect-ratio:1;background:rgba(196,181,253,0.35);top:-200px;right:-120px}
 .hero h1{
-  font-size:var(--h1);font-weight:800;line-height:1.1;
+  font-size:clamp(34px, 6.5vw, 64px);font-weight:800;line-height:1.1;
   letter-spacing:clamp(-2px, -0.35vw, -2.5px);color:var(--ink);
   margin-bottom:clamp(24px, 4vw, 36px);position:relative;z-index:1;
   text-wrap:balance;
@@ -88,245 +87,94 @@ nav .links a:hover{color:var(--ink-2)}
   background:linear-gradient(120deg,#4f46e5 0%,#2563eb 50%,#0ea5e9 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  padding:clamp(12px, 2vw, 15px) clamp(24px, 3.5vw, 34px);
-  border-radius:clamp(11px, 1.6vw, 14px);
-  font-size:clamp(14px, 2.4vw, 15px);font-weight:600;
-  transition:all .3s;cursor:pointer;border:none;line-height:1;
-}
-.btn svg{width:17px;height:17px;flex-shrink:0}
-.btn-primary{
-  background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;
-  box-shadow:0 6px 24px rgba(79,70,229,0.35);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(79,70,229,0.45)}
-.btn-ghost{
-  background:#fff;color:var(--ink-2);border:1.5px solid var(--line);
-  box-shadow:0 2px 8px rgba(15,23,42,0.03);
-}
-.btn-ghost:hover{transform:translateY(-2px);border-color:var(--brand);color:var(--brand)}
-.btn-tutorial{
-  background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;
-  box-shadow:0 6px 24px rgba(245,158,11,0.35);
-}
-.btn-tutorial:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(245,158,11,0.45)}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-
-/* Tutorial banner */
-.tutorial-banner{padding:0 clamp(16px, 4vw, 24px)}
-.tut-link{display:block;text-decoration:none;color:inherit}
-.tut-content{
-  display:flex;align-items:center;gap:16px;
-  background:linear-gradient(135deg,#f59e0b,#d97706);
-  border-radius:16px;padding:clamp(16px, 2.5vw, 22px) clamp(18px, 3vw, 28px);
-  box-shadow:0 8px 28px rgba(245,158,11,0.2);
-  transition:all .3s;
-}
-.tut-link:hover .tut-content{transform:translateY(-3px);box-shadow:0 14px 36px rgba(245,158,11,0.3)}
-.tut-icon{
-  width:clamp(38px, 5vw, 48px);height:clamp(38px, 5vw, 48px);border-radius:12px;flex-shrink:0;
-  background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;
-}
-.tut-icon svg{width:clamp(20px, 2.8vw, 24px);height:clamp(20px, 2.8vw, 24px);fill:#fff}
-.tut-text{flex:1;min-width:0}
-.tut-text strong{display:block;font-size:clamp(16px, 2.4vw, 19px);font-weight:800;color:#fff;margin-bottom:2px}
-.tut-text span{font-size:clamp(12px, 1.8vw, 13.5px);color:rgba(255,255,255,0.85)}
-.tut-arrow{flex-shrink:0}
-.tut-arrow svg{width:clamp(18px, 2.6vw, 22px);height:clamp(18px, 2.6vw, 22px);fill:rgba(255,255,255,0.7)}
-@media(max-width:480px){
-  .tut-content{flex-direction:column;text-align:center;gap:10px}
+.hero-sub{
+  font-size:clamp(14px, 2.2vw, 16px);color:var(--ink-3);
+  margin-bottom:clamp(32px, 5vw, 44px);max-width:480px;margin-left:auto;margin-right:auto;
+  position:relative;z-index:1;line-height:1.8;
 }
 
-/* Phone mockup */
-.phone-row{
-  position:relative;z-index:1;margin:clamp(40px, 7vw, 60px) auto 0;
+/* Nav cards */
+.nav-cards{
+  display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:clamp(12px, 2vw, 16px);
+  max-width:min(680px, 100%);margin:0 auto;position:relative;z-index:1;
+}
+.nav-card{
+  display:flex;align-items:center;gap:14px;
+  padding:clamp(16px, 2.5vw, 22px) clamp(18px, 3vw, 26px);
+  border-radius:14px;
+  background:#fff;border:1.5px solid var(--line);
+  box-shadow:0 4px 16px rgba(15,23,42,0.04);
+  transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;
+}
+.nav-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(79,70,229,0.1);
+  border-color:var(--brand);
+}
+.nav-card .card-icon{
+  width:clamp(40px, 5vw, 48px);height:clamp(40px, 5vw, 48px);border-radius:12px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
 }
-.phone{
-  width:clamp(230px, 30vw, 290px);
-  aspect-ratio:9/18;
-  background:#0f172a;border-radius:clamp(28px, 5vw, 40px);
-  padding:10px;position:relative;
-  filter:drop-shadow(0 30px 60px rgba(15,23,42,0.12));
-}
-.phone .screen{
-  width:100%;height:100%;border-radius:clamp(22px, 4vw, 30px);overflow:hidden;
-  background:linear-gradient(160deg,#111c34,#0b1226);
-  display:flex;flex-direction:column;
-}
-.phone .notch{width:31%;height:clamp(16px, 2vw, 22px);background:#0f172a;border-radius:999px;margin:2.5% auto 0;z-index:2;flex-shrink:0}
-.phone .top-bar{display:flex;align-items:center;justify-content:space-between;padding:4% 6% 2%;color:#8ba5d6;font-size:clamp(8px, 1.1vw, 9px)}
-.phone .top-bar span{background:rgba(255,255,255,0.06);padding:2px 8px;border-radius:4px}
-.phone .header{padding:1% 6% 2%;color:#fff;text-align:left}
-.phone .header h3{font-size:clamp(13px, 1.9vw, 16px);font-weight:700}
-.phone .header p{font-size:clamp(8.5px, 1.2vw, 10px);color:#8ba5d6;margin-top:1px}
-.phone .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px, 1.4vw, 10px);padding:3% 5% 2%;flex:1;align-content:start}
-.phone .grid .item{text-align:center}
-.phone .grid .item .ico{
-  width:clamp(36px, 5vw, 48px);aspect-ratio:1;margin:0 auto clamp(3px, 0.5vw, 5px);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;
-}
-.phone .grid .item .ico svg{width:clamp(16px, 2.4vw, 20px);height:clamp(16px, 2.4vw, 20px);fill:#fff}
-.phone .grid .item span{font-size:clamp(8px, 1.15vw, 9.5px);color:#8ba5d6}
-.phone .dock{display:flex;justify-content:space-around;padding:clamp(8px, 1vw, 12px) 5% 4%}
-.phone .dock .ico{
-  width:clamp(32px, 4.4vw, 42px);aspect-ratio:1;border-radius:11px;
-  display:flex;align-items:center;justify-content:center;
-}
-.phone .dock .ico svg{width:clamp(15px, 2vw, 19px);height:clamp(15px, 2vw, 19px);fill:#fff;flex-shrink:0}
-.phone .badge-app{
-  position:absolute;background:#fff;border-radius:10px;
-  padding:clamp(8px, 1vw, 12px) clamp(11px, 1.4vw, 16px) clamp(8px, 1vw, 12px) clamp(9px, 1.2vw, 14px);
-  display:flex;align-items:center;gap:clamp(8px, 1.2vw, 12px);
-  box-shadow:0 10px 30px rgba(15,23,42,0.12);
-  white-space:nowrap;animation:float 5s ease-in-out infinite;z-index:2;
-}
-.phone .badge-app .bico{width:clamp(26px, 3.8vw, 38px);height:clamp(26px, 3.8vw, 38px);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.phone .badge-app .bico svg{width:clamp(13px, 1.9vw, 18px);height:clamp(13px, 1.9vw, 18px);fill:#fff}
-.phone .badge-app .btxt{text-align:left}
-.phone .badge-app .btxt strong{display:block;font-size:clamp(11px, 1.6vw, 13px);color:var(--ink);font-weight:600}
-.phone .badge-app .btxt span{font-size:clamp(9px, 1.3vw, 11px);color:var(--ink-4)}
-.phone .badge-1{top:-16px;right:min(-5px, -2vw)}
-.phone .badge-2{bottom:clamp(40px, 8vw, 70px);right:min(-6px, -2.5vw);animation-delay:2.5s}
-.phone .badge-3{top:clamp(50px, 10vw, 80px);left:min(-6px, -2.5vw);animation-delay:1.2s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.nav-card .card-icon svg{width:clamp(20px, 2.8vw, 24px);height:clamp(20px, 2.8vw, 24px)}
+.nav-card .card-text{text-align:left;min-width:0}
+.nav-card .card-text strong{display:block;font-size:clamp(14px, 2vw, 16px);font-weight:700;color:var(--ink);margin-bottom:1px}
+.nav-card .card-text span{font-size:clamp(11.5px, 1.7vw, 12.5px);color:var(--ink-3)}
 
-/* Section */
-.section{padding:var(--pad-section) clamp(16px, 4vw, 24px)}
-.section-alt{background:var(--bg-alt);border-top:1px solid var(--line)}
-.section-head{text-align:center;margin:0 auto clamp(40px, 6vw, 56px);max-width:640px}
-.section-head h2{font-size:var(--h2);font-weight:800;letter-spacing:-1.2px;color:var(--ink);margin-bottom:10px;line-height:1.15}
-.section-head p{font-size:clamp(14px, 2vw, 15px);color:var(--ink-3);max-width:520px;margin:0 auto;line-height:1.7}
-
-/* Feature groups */
-.feature-group{max-width:820px;margin:0 auto;display:flex;flex-direction:column}
-.feature-group .fg-item{
-  display:flex;align-items:flex-start;gap:clamp(14px, 3.4vw, 32px);
-  padding:clamp(26px, 5vw, 40px) 0;
-  border-bottom:1px solid var(--line);
+/* QR Modal */
+.qr-modal{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(15,23,42,0.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:20px;
 }
-.feature-group .fg-item:last-child{border-bottom:none}
-.feature-group .fg-item .fg-icon{
-  width:clamp(42px, 6.5vw, 58px);aspect-ratio:1;border-radius:14px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
+.qr-modal.show{display:flex;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.qr-box{
+  background:#fff;border-radius:20px;padding:clamp(24px, 4vw, 36px);
+  text-align:center;max-width:320px;width:100%;
+  box-shadow:0 20px 60px rgba(15,23,42,0.2);
+  animation:slideUp .3s ease;
 }
-.feature-group .fg-item .fg-icon svg{width:clamp(20px, 3vw, 26px);height:clamp(20px, 3vw, 26px)}
-.feature-group .fg-item .fg-text{flex:1;min-width:0;padding-top:2px}
-.feature-group .fg-item .fg-text h3{font-size:clamp(15px, 2.2vw, 17px);font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.4}
-.feature-group .fg-item .fg-text p{font-size:clamp(13px, 1.9vw, 14px);color:var(--ink-3);line-height:1.8}
-
-/* Steps */
-.steps{display:flex;max-width:820px;margin:0 auto;gap:0}
-.step{flex:1;text-align:center;padding:0 clamp(8px, 1.6vw, 20px);position:relative}
-.step:not(:last-child)::after{
-  content:'';position:absolute;top:clamp(26px, 5vw, 30px);right:-6px;width:clamp(14px, 2vw, 30px);height:1.5px;
-  background:linear-gradient(90deg,var(--brand),transparent);
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.qr-box .qr-title{
+  font-size:clamp(16px, 2.4vw, 18px);font-weight:700;color:var(--ink);margin-bottom:4px;
 }
-.step .c{
-  width:clamp(46px, 7.5vw, 64px);aspect-ratio:1;margin:0 auto clamp(12px, 2vw, 18px);border-radius:50%;
-  background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-size:clamp(16px, 2.6vw, 20px);font-weight:800;
-  box-shadow:0 6px 20px rgba(79,70,229,0.25);
+.qr-box .qr-hint{
+  font-size:clamp(13px, 1.9vw, 14px);color:var(--ink-3);margin-bottom:clamp(16px, 2.5vw, 22px);
 }
-.step h3{font-size:clamp(14px, 2vw, 16px);font-weight:700;color:var(--ink);margin-bottom:6px}
-.step p{font-size:clamp(12px, 1.8vw, 13.5px);color:var(--ink-3);line-height:1.7;max-width:220px;margin:0 auto}
-
-/* Download */
-.dl-wrap{max-width:min(540px, 100%);margin:0 auto;text-align:center}
-.dl-row{
-  display:flex;align-items:center;justify-content:space-between;gap:clamp(12px, 2.4vw, 18px);
-  padding:clamp(16px, 2.6vw, 20px) clamp(16px, 2.8vw, 28px);
-  border:1.5px solid var(--line);border-radius:var(--radius);
-  transition:all .3s;
+.qr-box .qr-img{
+  width:min(200px, 60vw);margin:0 auto;border-radius:12px;overflow:hidden;
+  border:1px solid var(--line);
 }
-.dl-row:hover{border-color:var(--brand);box-shadow:0 6px 24px rgba(79,70,229,0.08)}
-.dl-row + .dl-row{margin-top:16px}
-.dl-row .info{display:flex;align-items:center;gap:clamp(12px, 2.2vw, 18px);min-width:0;flex:1;justify-content:flex-start}
-.dl-row .app-icon{
-  width:clamp(44px, 6.5vw, 54px);aspect-ratio:1;border-radius:14px;flex-shrink:0;
-  background:linear-gradient(135deg,#6366f1,#2563eb);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 18px rgba(79,70,229,0.3);
+.qr-box .qr-img img{width:100%;display:block}
+.qr-box .qr-tip{
+  margin-top:clamp(14px, 2vw, 18px);font-size:clamp(12px, 1.8vw, 13px);
+  color:var(--brand);font-weight:600;
 }
-.dl-row .app-icon svg{width:clamp(22px, 3.2vw, 26px);height:clamp(22px, 3.2vw, 26px);fill:#fff}
-.dl-row .text{text-align:left;min-width:0}
-.dl-row .text h4{font-size:clamp(15px, 2.2vw, 17px);font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dl-row .text .meta{font-size:clamp(11px, 1.6vw, 12px);color:var(--ink-4);margin-top:2px}
-.dl-btn{
-  padding:clamp(11px, 1.8vw, 13px) clamp(20px, 3vw, 28px);border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;
-  font-size:clamp(13px, 1.9vw, 14px);font-weight:700;display:inline-flex;align-items:center;gap:7px;
-  box-shadow:0 4px 16px rgba(79,70,229,0.3);
-  transition:all .25s;
+.qr-box .qr-close{
+  margin-top:clamp(16px, 2.5vw, 22px);padding:10px 24px;
+  background:var(--brand-bg);border:none;border-radius:10px;
+  font-size:14px;font-weight:600;color:var(--brand);cursor:pointer;
+  transition:all .2s;
 }
-.dl-btn svg{width:16px;height:16px;flex-shrink:0}
-.dl-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(79,70,229,0.4);color:#fff}
-.dl-note{text-align:center;color:var(--ink-4);font-size:clamp(12px, 1.8vw, 13px);margin-top:22px}
-.dl-note a{color:var(--ink-3);font-weight:600;transition:color .2s}
-.dl-note a:hover{color:var(--brand)}
-
-/* Tool guide */
-.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,24px);max-width:960px;margin:0 auto}
-.guide-card{
-  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:clamp(14px,2.4vw,18px);text-align:center;transition:all .3s;
-}
-.guide-card:hover{border-color:var(--brand);box-shadow:0 10px 30px rgba(79,70,229,0.1);transform:translateY(-4px)}
-.guide-card img{width:100%;display:block;border-radius:clamp(10px,1.8vw,14px);box-shadow:0 4px 16px rgba(15,23,42,0.1)}
-.guide-card h3{font-size:clamp(15px,2.2vw,17px);font-weight:800;color:var(--ink);margin:clamp(14px,2.4vw,18px) 0 8px;display:flex;align-items:center;justify-content:center;gap:8px}
-.guide-card .gnum{
-  width:24px;height:24px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:800;
-}
-.guide-card p{font-size:clamp(12.5px,1.8vw,13.5px);color:var(--ink-3);line-height:1.8;text-align:left}
-@media(max-width:760px){
-  .guide-grid{grid-template-columns:1fr;max-width:330px}
-  .guide-card p{text-align:center}
-}
+.qr-box .qr-close:hover{background:var(--brand);color:#fff}
 
 /* Footer */
-footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(28px, 5vw, 44px) clamp(16px, 4vw, 24px) clamp(20px, 3vw, 28px)}
+footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:clamp(20px, 3vw, 28px) clamp(16px, 4vw, 24px)}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 footer .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:clamp(13px, 2vw, 14px);color:var(--ink);white-space:nowrap}
 footer .brand .mark{width:clamp(22px, 3vw, 26px);height:clamp(22px, 3vw, 26px);border-radius:6px;background:linear-gradient(135deg,#6366f1,#2563eb);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 footer .brand .mark svg{width:12px;height:12px;fill:#fff}
 footer .links{display:flex;gap:clamp(16px, 2.4vw, 22px);flex-wrap:wrap}
-footer .links a{font-size:clamp(12px, 1.8vw, 12.5px);color:var(--ink-4);transition:color .2s}
+footer .links a{font-size:clamp(12px, 1.8vw, 12.5px);color:var(--ink-4);transition:color .2s;cursor:pointer}
 footer .links a:hover{color:var(--brand)}
 footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
 
-/* Ripple */
-.rl{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
-.rl.show{opacity:1;transform:translateY(0)}
-.rl.d1{transition-delay:.06s}
-.rl.d2{transition-delay:.12s}
-.rl.d3{transition-delay:.18s}
-.rl.d4{transition-delay:.24s}
-.rl.d5{transition-delay:.30s}
-
-/* Narrow screens: keep same layout, fluid-shrink only */
 @media(max-width:480px){
-  .hero{padding-top:clamp(70px, 16vh, 90px)}
-  .hero-btns{gap:10px}
-  .hero-btns .btn{flex:1 1 auto;max-width:220px}
-  .phone .badge-app{animation:none}
-  .phone .badge-2{bottom:clamp(34px, 20vw, 50px)}
-  .dl-row .info{flex-direction:column;align-items:center;text-align:center}
-  .dl-row .text{text-align:center}
-  .dl-row{flex-direction:column}
+  .nav-cards{grid-template-columns:1fr}
 }
 @media(max-width:360px){
-  nav .logo{font-size:13px}
   .hero h1{font-size:clamp(30px, 8.5vw, 34px)}
-}
-@media(prefers-reduced-motion:reduce){
-  .rl{opacity:1;transform:none;transition:none}
-  .phone .badge-app{animation:none}
-  *{scroll-behavior:auto !important}
 }
 </style>
 </head>
@@ -341,12 +189,11 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       冥城应用商店
     </div>
     <div class="links">
-      <a href="#features">功能特性</a>
+      <a href="features.html">功能特性</a>
       <a href="tutorial.html">安装教程</a>
-      <a href="#usage">使用说明</a>
-      <a href="#download">下载</a>
-      <a href="#tool-guide">安装工具</a>
-      <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">联系管理员</a>
+      <a href="download.html">下载</a>
+      <a onclick="showQR()">联系管理员</a>
+      <a href="http://103.149.200.173/" target="_blank" rel="noopener">商店预览</a>
     </div>
   </div>
 </nav>
@@ -355,257 +202,40 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
   <div class="container">
-    <h1 class="rl">冥城应用商店<br><span class="grad">车机应用平台</span></h1>
-    <div class="hero-btns rl d1">
-      <a href="#download" class="btn btn-primary">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        立即下载
+    <h1>冥城应用商店<br><span class="grad">车机应用平台</span></h1>
+    <p class="hero-sub">车机应用管理、资源下载、免费娱乐、手机互联、激活即用</p>
+    <div class="nav-cards">
+      <a href="download.html" class="nav-card">
+        <div class="card-icon" style="background:#eef2ff;color:#6366f1">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </div>
+        <div class="card-text"><strong>立即下载</strong><span>商店APK · 车机助手</span></div>
       </a>
-      <a href="tutorial.html" class="btn btn-tutorial">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-        安装教程
+      <a href="tutorial.html" class="nav-card">
+        <div class="card-icon" style="background:#fefce8;color:#f59e0b">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+        </div>
+        <div class="card-text"><strong>安装教程</strong><span>图文步骤 · 手把手教</span></div>
       </a>
-      <a href="#features" class="btn btn-ghost">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
-        了解更多
-      </a>
-      <a href="http://103.149.200.173/" target="_blank" rel="noopener" class="btn btn-ghost">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-        商店预览
-      </a>
-    </div>
-
-    <div class="phone-row rl d2">
-      <div class="phone">
-        <div class="badge-app badge-1">
-          <div class="bico" style="background:linear-gradient(135deg,#22c55e,#16a34a)"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-          <div class="btxt"><strong>安装成功</strong><span>全功能可用</span></div>
-        </div>
-        <div class="badge-app badge-2">
-          <div class="bico" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
-          <div class="btxt"><strong>激活成功</strong><span>全功能解锁</span></div>
-        </div>
-        <div class="badge-app badge-3">
-          <div class="bico" style="background:linear-gradient(135deg,#06b6d4,#0891b2)"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
-          <div class="btxt"><strong>手机互联</strong><span>CarPlay / 亿连</span></div>
-        </div>
-        <div class="screen">
-          <div class="notch"></div>
-          <div class="top-bar"><span>冥城</span><span>WiFi</span><span>电池</span></div>
-          <div class="header">
-            <h3>应用商店</h3>
-            <p>车机应用管理平台</p>
-          </div>
-          <div class="grid">
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#6366f1,#4f46e5)"><svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg></div><span>应用商店</span></div>
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#10b981,#059669)"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div><span>手机互联</span></div>
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#f43f5e,#e11d48)"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div><span>免费影视</span></div>
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div><span>云端备份</span></div>
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></div><span>悬浮球</span></div>
-            <div class="item"><div class="ico" style="background:linear-gradient(135deg,#06b6d4,#0891b2)"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg></div><span>一键激活</span></div>
-          </div>
-          <div class="dock">
-            <div class="ico" style="background:linear-gradient(135deg,#6366f1,#2563eb)"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/></svg></div>
-            <div class="ico" style="background:linear-gradient(135deg,#94a3b8,#64748b)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
-            <div class="ico" style="background:linear-gradient(135deg,#64748b,#475569)"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="tutorial-banner">
-  <div class="container">
-    <a href="tutorial.html" class="tut-link">
-      <div class="tut-content">
-        <div class="tut-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-        </div>
-        <div class="tut-text">
-          <strong>车机安装教程</strong>
-          <span>图文步骤指引，手把手教你开启 ADB 并安装应用</span>
-        </div>
-        <div class="tut-arrow">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<section class="section" id="features">
-  <div class="container">
-    <div class="section-head rl">
-      <h2>核心功能</h2>
-      <p>覆盖车机应用管理、娱乐资源、手机互联、系统工具等全方位需求</p>
-    </div>
-    <div class="feature-group">
-      <div class="fg-item rl d1">
-        <div class="fg-icon" style="background:#eef2ff;color:#6366f1">
+      <a href="features.html" class="nav-card">
+        <div class="card-icon" style="background:#f0fdf4;color:#10b981">
           <svg fill="currentColor" viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
         </div>
-        <div class="fg-text">
-          <h3>应用商店 — 浏览、下载、安装、管理一条龙</h3>
-          <p>精选车机专用应用，分类展示，一键下载安装。支持应用列表管理、版本更新检测、已安装应用卸载，一站式搞定车机软件需求。</p>
-        </div>
-      </div>
-      <div class="fg-item rl d2">
-        <div class="fg-icon" style="background:#fef2f2;color:#f43f5e">
+        <div class="card-text"><strong>功能特性</strong><span>应用商店 · 手机互联</span></div>
+      </a>
+      <a onclick="showQR()" class="nav-card" style="cursor:pointer">
+        <div class="card-icon" style="background:#fef2f2;color:#f43f5e">
           <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         </div>
-        <div class="fg-text">
-          <h3>免费资源 — 听歌、看直播、追剧全免费</h3>
-          <p>内置电视直播、在线影视、音乐播放等免费资源，支持直播频道切换、点播搜索、歌单管理。车机连网即可畅享，无需额外付费。</p>
+        <div class="card-text"><strong>联系管理员</strong><span>扫码添加微信</span></div>
+      </a>
+      <a href="http://103.149.200.173/" target="_blank" rel="noopener" class="nav-card">
+        <div class="card-icon" style="background:#ecfeff;color:#06b6d4">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
-      </div>
-      <div class="fg-item rl d3">
-        <div class="fg-icon" style="background:#f0fdf4;color:#10b981">
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
-        </div>
-        <div class="fg-text">
-          <h3>手机互联 — CarPlay、CarLife、亿连多协议支持</h3>
-          <p>集成主流手机互联方案，CarPlay、CarLife、亿连、CarLink 等多协议支持。手机应用投射到车机大屏，导航、通话、音乐无缝切换。</p>
-        </div>
-      </div>
-      <div class="fg-item rl d4">
-        <div class="fg-icon" style="background:#faf5ff;color:#8b5cf6">
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-        </div>
-        <div class="fg-text">
-          <h3>悬浮球 — 快捷操作，自定义功能菜单</h3>
-          <p>桌面悬浮球，一键呼出常用功能。支持自定义菜单项、快捷开关、手势操作，提升车机操作效率，驾驶时更安全便捷。</p>
-        </div>
-      </div>
-      <div class="fg-item rl d5">
-        <div class="fg-icon" style="background:#fefce8;color:#f59e0b">
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-        </div>
-        <div class="fg-text">
-          <h3>云端备份 — 数据安全，永不丢失</h3>
-          <p>应用数据云端存储，支持备份和恢复，换机或重置后一键恢复。资源实时更新，数据安全可靠，无需担心丢失。</p>
-        </div>
-      </div>
-      <div class="fg-item rl d5">
-        <div class="fg-icon" style="background:#ecfeff;color:#06b6d4">
-          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
-        </div>
-        <div class="fg-text">
-          <h3>一键激活 — 输入激活码，解锁全部功能</h3>
-          <p>获取激活码后，在应用内输入即可解锁全部功能。操作简单，一步到位，畅享完整服务体验。</p>
-        </div>
-      </div>
+        <div class="card-text"><strong>商店预览</strong><span>在线体验 · 实时同步</span></div>
+      </a>
     </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="usage">
-  <div class="container">
-    <div class="section-head rl">
-      <h2>三步开始使用</h2>
-    </div>
-    <div class="steps">
-      <div class="step rl d1">
-        <div class="c">1</div>
-        <h3>下载安装</h3>
-        <p>下载 APK 安装包，传到车机完成安装</p>
-      </div>
-      <div class="step rl d2">
-        <div class="c">2</div>
-        <h3>获取激活码</h3>
-        <p>联系管理员获取激活码，应用内输入激活</p>
-      </div>
-      <div class="step rl d3">
-        <div class="c">3</div>
-        <h3>畅享服务</h3>
-        <p>激活后即可使用全部功能，畅享车机体验</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="download">
-  <div class="container">
-    <div class="section-head rl">
-      <h2>下载冥城应用商店</h2>
-    </div>
-    <div class="dl-wrap rl d1">
-      <div class="dl-row">
-        <div class="info">
-          <div class="app-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-          </div>
-          <div class="text">
-            <h4>冥城应用商店·应用管家版</h4>
-            <div class="meta">车机版 &middot; 最新版本 &middot; 高速下载</div>
-          </div>
-        </div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店.apk">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          下载
-        </a>
-      </div>
-      <div class="dl-row">
-        <div class="info">
-          <div class="app-icon" style="background:linear-gradient(135deg,#0ea5e9,#2563eb)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-          </div>
-          <div class="text">
-            <h4>冥城应用商店·独立版</h4>
-            <div class="meta">独立商店 &middot; 自动更新 &middot; 最新版本</div>
-          </div>
-        </div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/%E5%86%A5%E5%9F%8E%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97.apk" class="dl-btn" download="冥城应用商店-独立版.apk">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          下载
-        </a>
-      </div>
-      <div class="dl-row">
-        <div class="info">
-          <div class="app-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-          </div>
-          <div class="text">
-            <h4>冥城车机助手·安装工具</h4>
-            <div class="meta">手机端 &middot; 无线连接车机 &middot; 远程安装应用</div>
-          </div>
-        </div>
-        <a href="https://ghfast.top/https://raw.githubusercontent.com/NJS98-UI/appstore-data/main/apk/%E5%86%A5%E5%9F%8E%E8%BD%A6%E6%9C%BA%E5%8A%A9%E6%89%8B.apk" class="dl-btn" download="冥城车机助手.apk">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-          下载
-        </a>
-      </div>
-      <p class="dl-note">激活需要使用激活码，下载后请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a>完成激活</p>
-      <p class="dl-note" style="margin-top:14px">「车机助手」为手机端安装工具，可将商店应用远程装进车机，详见下方<a href="#tool-guide">使用说明</a></p>
-      <p class="dl-note" style="margin-top:14px">「商店预览」为服务器实时预览地址，与商店应用内容同步更新——商店里有什么，这里就有什么。点击上方「商店预览」按钮即可在线体验。</p>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="tool-guide">
-  <div class="container">
-    <div class="section-head rl">
-      <h2>车机助手·安装工具</h2>
-      <p>手机端安装工具，无线连接车机，把商店里的应用一键装进车机</p>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card rl d1">
-        <img src="docs/tool-1-connect.jpg" alt="车机助手连接车机界面" loading="lazy">
-        <h3><span class="gnum">1</span>连接车机</h3>
-        <p>手机与车机连接同一 WiFi，输入车机 IP 地址和端口连接；也支持无线配对、自动发现设备、USB OTG 有线连接。</p>
-      </div>
-      <div class="guide-card rl d2">
-        <img src="docs/tool-2-install.jpg" alt="车机助手车载安装界面" loading="lazy">
-        <h3><span class="gnum">2</span>一键安装</h3>
-        <p>在「安装」页选择本地下载好的商店 APK 推送到车机，也可以直接导出手机上已装的应用安装到车机。</p>
-      </div>
-      <div class="guide-card rl d3">
-        <img src="docs/tool-3-tools.jpg" alt="车机助手工具界面" loading="lazy">
-        <h3><span class="gnum">3</span>玩转工具</h3>
-        <p>无线 ADB 调试、屏幕截图、激活/启动应用、修改 DPI 与分辨率、动画调整等实用功能，深度玩转车机。</p>
-      </div>
-    </div>
-    <p class="dl-note" style="margin-top:32px">配合冥城应用商店使用：先在手机下载商店里的应用安装包，再通过车机助手推送到车机完成安装。遇到问题请联系<a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank" onclick="return openQQ(event)">管理员</a></p>
   </div>
 </section>
 
@@ -616,78 +246,42 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       冥城应用商店
     </div>
     <div class="links">
-      <a href="#features">功能特性</a>
+      <a href="features.html">功能特性</a>
       <a href="tutorial.html">安装教程</a>
-      <a href="#usage">使用说明</a>
-      <a href="#download">下载</a>
-      <a href="#tool-guide">安装工具</a>
+      <a href="download.html">下载</a>
+      <a onclick="showQR()">联系管理员</a>
     </div>
     <div class="copy">&copy; <span id="year">2026</span> 冥城应用商店</div>
   </div>
 </footer>
 
+<!-- QR Modal -->
+<div class="qr-modal" id="qrModal" onclick="if(event.target===this)closeQR()">
+  <div class="qr-box">
+    <div class="qr-title">联系管理员</div>
+    <div class="qr-hint">微信扫一扫添加好友</div>
+    <div class="qr-img">
+      <img src="docs/admin.jpg" alt="管理员微信二维码">
+    </div>
+    <div class="qr-tip">微信扫一扫</div>
+    <button class="qr-close" onclick="closeQR()">关闭</button>
+  </div>
+</div>
+
 <script>
-var QQ_UIN = '460290139';
-function copyQQ(ui){
-  var ok = false;
-  try{
-    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(ui); ok = true; }
-  }catch(e){ ok = false; }
-  if(!ok){
-    try{
-      var ta = document.createElement('textarea');
-      ta.value = ui; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      ok = document.execCommand('copy');
-      document.body.removeChild(ta);
-    }catch(e){ ok = false; }
-  }
-  return ok;
-}
-function openQQ(e){
-  if(e && e.preventDefault) e.preventDefault();
-  var uin = QQ_UIN;
-  var web = 'https://wpa.qq.com/msgrd?v=3&uin=' + uin + '&site=qq&menu=yes';
-  var mobileQQ = 'mqqwpa://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com';
-  var desktopQQ = 'tencent://message/?uin=' + uin + '&site=qq&menu=yes';
-  var ua = navigator.userAgent || '';
-  var isAndroid = /Android/i.test(ua);
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
-  var launchUrl = desktopQQ;
-  copyQQ(uin);
-
-  if(isAndroid){
-    launchUrl = 'intent://im/chat?chat_type=wpa&uin=' + uin + '&version=1&src_type=web&web_src=oicqzone.com#Intent;scheme=mqqwpa;package=com.tencent.mobileqq;S.browser_fallback_url=' + encodeURIComponent(web) + ';end';
-  }else if(isIOS){
-    launchUrl = mobileQQ;
-  }
-
-  var fired = false;
-  var fallbackTimer;
-  var cleanup = function(){
-    document.removeEventListener('visibilitychange', onHide);
-    window.removeEventListener('pagehide', onHide);
-    window.removeEventListener('blur', onHide);
-  };
-  var onHide = function(){
-    fired = true;
-    clearTimeout(fallbackTimer);
-    cleanup();
-  };
-  document.addEventListener('visibilitychange', onHide);
-  window.addEventListener('pagehide', onHide);
-  window.addEventListener('blur', onHide);
-  fallbackTimer = setTimeout(function(){
-    cleanup();
-    if(!fired){
-      window.location.href = web;
-    }
-  }, 1500);
-  window.location.href = launchUrl;
-  return false;
-}
 document.getElementById('year').textContent = new Date().getFullYear();
-document.querySelectorAll('.rl').forEach(function(el, i){setTimeout(function(){el.classList.add('show')}, i*80)});
+
+function showQR(){
+  document.getElementById('qrModal').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeQR(){
+  document.getElementById('qrModal').classList.remove('show');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closeQR();
+});
 </script>
 </body>
 </html>

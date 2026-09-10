@@ -194,6 +194,20 @@ footer .links{display:flex;gap:clamp(16px, 2.4vw, 22px);flex-wrap:wrap}
 footer .links a{font-size:clamp(12px, 1.8vw, 12.5px);color:var(--ink-4);transition:color .2s}
 footer .links a:hover{color:var(--brand)}
 footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
+
+/* QR Modal */
+.qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(15,23,42,0.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.qr-modal.show{display:flex;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.qr-box{background:#fff;border-radius:20px;padding:clamp(24px, 4vw, 36px);text-align:center;max-width:320px;width:100%;box-shadow:0 20px 60px rgba(15,23,42,0.2);animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.qr-box .qr-title{font-size:clamp(16px, 2.4vw, 18px);font-weight:700;color:var(--ink);margin-bottom:4px}
+.qr-box .qr-hint{font-size:clamp(13px, 1.9vw, 14px);color:var(--ink-3);margin-bottom:clamp(16px, 2.5vw, 22px)}
+.qr-box .qr-img{width:min(200px, 60vw);margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.qr-box .qr-img img{width:100%;display:block}
+.qr-box .qr-tip{margin-top:clamp(14px, 2vw, 18px);font-size:clamp(12px, 1.8vw, 13px);color:var(--brand);font-weight:600}
+.qr-box .qr-close{margin-top:clamp(16px, 2.5vw, 22px);padding:10px 24px;background:var(--brand-bg);border:none;border-radius:10px;font-size:14px;font-weight:600;color:var(--brand);cursor:pointer;transition:all .2s}
+.qr-box .qr-close:hover{background:var(--brand);color:#fff}
 </style>
 </head>
 <body>
@@ -209,8 +223,8 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
     <div class="links">
       <a href="index.html">首页</a>
       <a href="tutorial.html" class="active">安装教程</a>
-      <a href="index.html#download">下载</a>
-      <a href="https://wpa.qq.com/msgrd?v=3&uin=460290139&site=qq&menu=yes" target="_blank">联系管理员</a>
+      <a href="download.html">下载</a>
+      <a onclick="showQR()">联系管理员</a>
     </div>
   </div>
 </nav>
@@ -370,14 +384,29 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
     <div class="links">
       <a href="index.html">首页</a>
       <a href="tutorial.html">安装教程</a>
-      <a href="index.html#download">下载</a>
+      <a href="download.html">下载</a>
+      <a onclick="showQR()">联系管理员</a>
     </div>
     <div class="copy">&copy; <span id="year">2026</span> 冥城应用商店</div>
   </div>
 </footer>
 
+<!-- QR Modal -->
+<div class="qr-modal" id="qrModal" onclick="if(event.target===this)closeQR()">
+  <div class="qr-box">
+    <div class="qr-title">联系管理员</div>
+    <div class="qr-hint">微信扫一扫添加好友</div>
+    <div class="qr-img"><img src="docs/admin.jpg" alt="管理员微信二维码"></div>
+    <div class="qr-tip">微信扫一扫</div>
+    <button class="qr-close" onclick="closeQR()">关闭</button>
+  </div>
+</div>
+
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+function showQR(){document.getElementById('qrModal').classList.add('show');document.body.style.overflow='hidden'}
+function closeQR(){document.getElementById('qrModal').classList.remove('show');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR()});
 </script>
 </body>
 </html>
