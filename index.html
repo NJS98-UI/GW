@@ -100,19 +100,28 @@ nav .links a:hover::after{width:14px;left:calc(50% - 7px)}
 .btn-g:hover{background:var(--surface2);border-color:var(--line3);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
 .btn-g svg{width:18px;height:18px;fill:currentColor}
 
+/* Section label */
+.section-label{text-align:center;margin-bottom:20px;animation:fadeUp .6s var(--ease) .28s both}
+.section-label h2{font-size:clamp(18px,3vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.5px;margin-bottom:4px}
+.section-label p{font-size:clamp(13px,1.8vw,14px);color:var(--ink4)}
+
 /* Feature cards grid - ALL features as big buttons */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;max-width:min(960px,100%);margin:0 auto;animation:fadeUp .7s var(--ease) .32s both}
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  max-width:min(960px,100%);margin:0 auto;
+  animation:fadeUp .7s var(--ease) .32s both;
+}
 .card{
   position:relative;padding:28px;border-radius:var(--radius);
-  background:var(--surface);border:1px solid var(--line);
+  background:var(--surface);border:1px solid var(--line2);
   backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);
   transition:all .35s var(--ease);overflow:hidden;cursor:pointer;
   box-shadow:var(--shadow);
 }
 .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gl,transparent) 0%,transparent 50%);opacity:0;transition:opacity .35s}
-.card::after{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)}
-.card:hover{transform:translateY(-6px);border-color:var(--line2);background:var(--surface2);box-shadow:var(--shadow-hover)}
-.card:hover::before{opacity:.06}
+.card::after{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent)}
+.card:hover{transform:translateY(-6px);border-color:var(--line3);background:var(--surface2);box-shadow:var(--shadow-hover)}
+.card:hover::before{opacity:.08}
 .card .ic{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;position:relative;z-index:1;transition:transform .35s var(--ease)}
 .card:hover .ic{transform:scale(1.08)}
 .card .ic svg{width:26px;height:26px}
@@ -121,6 +130,26 @@ nav .links a:hover::after{width:14px;left:calc(50% - 7px)}
 .card .ar{position:absolute;top:28px;right:28px;opacity:0;transition:all .3s;z-index:1}
 .card .ar svg{width:18px;height:18px;fill:var(--ink4)}
 .card:hover .ar{opacity:1;transform:translateX(4px)}
+
+/* Tablet: 2 columns */
+@media(max-width:768px){.cards{grid-template-columns:repeat(2,1fr)}}
+/* Mobile: horizontal scroll to show all cards are there */
+@media(max-width:520px){
+  .cards{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:12px;padding-bottom:8px;margin:0 -20px;padding:0 20px 8px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .cards::-webkit-scrollbar{display:none}
+  .card{
+    flex:0 0 78%;scroll-snap-align:center;
+    padding:24px;
+  }
+  .card .ic{width:48px;height:48px;border-radius:12px;margin-bottom:16px}
+  .card .ic svg{width:24px;height:24px}
+  .card h3{font-size:17px}
+  .card p{font-size:13.5px}
+}
 
 /* Stats */
 .stats{display:flex;justify-content:center;gap:clamp(32px,5vw,56px);margin-top:56px;animation:fadeUp .7s var(--ease) .4s both;flex-wrap:wrap}
@@ -142,7 +171,7 @@ nav .links a:hover::after{width:14px;left:calc(50% - 7px)}
 .qr-box .qc{margin-top:22px;padding:11px 26px;background:var(--bg3);border:1px solid var(--line2);border-radius:10px;font-size:13.5px;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .2s}
 .qr-box .qc:hover{background:var(--line);border-color:var(--line3)}
 
-@media(max-width:520px){.cards{grid-template-columns:1fr}.hero-cta{flex-direction:column;width:100%;max-width:300px;margin:0 auto 40px}.btn-p,.btn-g{justify-content:center}}
+@media(max-width:520px){.hero-cta{flex-direction:column;width:100%;max-width:300px;margin:0 auto 40px}.btn-p,.btn-g{justify-content:center}}
 </style>
 </head>
 <body>
@@ -181,6 +210,11 @@ nav .links a:hover::after{width:14px;left:calc(50% - 7px)}
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
         安装教程
       </a>
+    </div>
+
+    <div class="section-label">
+      <h2>全部功能</h2>
+      <p>滑动查看所有功能入口</p>
     </div>
 
     <div class="cards">
