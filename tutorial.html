@@ -275,12 +275,12 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
       <div class="step-num">3</div>
       <div class="step-text">
         <h2>输入密码</h2>
-        <p>系统会显示产品序列号，密码为序列号后六位</p>
-        <span class="tip">密码 = 序列号后六位（如 X802018 → 密码 802018）</span>
+        <p>系统会显示产品序列号，将序列号后六位乘以 802018，取结果的后六位作为密码</p>
+        <span class="tip">密码 = 序列号后六位 × 802018 → 取结果后六位</span>
       </div>
     </div>
     <div class="step-img">
-      <img src="docs/step3.png" alt="第三步：输入密码，密码为序列号后六位">
+      <img src="docs/step3.png" alt="第三步：输入密码，序列号后六位乘802018取结果后六位">
     </div>
   </div>
 </section>
@@ -362,6 +362,41 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
             <img src="docs/admin.jpg" alt="联系管理员二维码">
           </div>
           <p>扫码联系管理员获取 U 盘文件</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PC Remote Install -->
+<section class="step-section" id="remote">
+  <div class="container">
+    <div class="x70l-section" style="background:#eef2ff;border-color:rgba(79,70,229,0.15)">
+      <div class="x70l-head">
+        <div class="x70l-badge" style="background:linear-gradient(135deg,#6366f1,#2563eb)">🖥</div>
+        <h2>电脑远程安装</h2>
+      </div>
+      <div class="x70l-body">
+        <p>如果你不方便自己操作车机安装，可以联系管理员通过远程方式帮你安装。</p>
+        <p style="font-weight:600;color:var(--ink-2);margin-top:8px">步骤：</p>
+        <p>1. 在电脑上下载安装 ToDesk 远程软件</p>
+        <p>2. 打开 ToDesk，将你的设备代码和密码发给管理员</p>
+        <p>3. 管理员远程连接后帮你完成安装</p>
+        <div style="margin-top:16px;text-align:center">
+          <a href="https://www.todesk.com/download" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#2563eb);color:#fff;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(79,70,229,0.3);transition:all .25s">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:17px;height:17px"><path d="M19 9h-4V5H9v4H5v6h4v4h6v-4h4V9z"/></svg>
+            下载 ToDesk
+          </a>
+        </div>
+        <p style="margin-top:16px;font-size:clamp(12px,1.7vw,13px);color:var(--ink-4)">支持 Windows / macOS / Linux，个人版免费使用</p>
+        <div style="margin-top:20px;padding:14px 18px;background:rgba(79,70,229,0.06);border-radius:10px;font-size:clamp(13px,1.9vw,14px);color:var(--ink-3);line-height:1.8">
+          安装好 ToDesk 后，扫码联系管理员，把你的 ToDesk 设备代码和密码发给管理员即可。
+        </div>
+        <div class="x70l-qr" style="margin-top:20px">
+          <div class="qr-box">
+            <img src="docs/admin.jpg" alt="联系管理员二维码">
+          </div>
+          <p>扫码联系管理员进行远程安装</p>
         </div>
       </div>
     </div>
