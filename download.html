@@ -42,14 +42,17 @@ nav .links a.active{color:var(--brand);font-weight:600}
 
 /* Hub cards */
 .hub{flex:1;padding:0 0 clamp(40px, 6vw, 60px)}
-.hub-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));gap:clamp(12px, 2vw, 16px);max-width:min(720px, 100%);margin:0 auto}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:clamp(12px, 2vw, 16px);max-width:min(820px, 100%);margin:0 auto}
 .dl-card{
   display:flex;flex-direction:column;align-items:center;
-  padding:clamp(20px, 3vw, 28px);
+  padding:clamp(16px, 2.5vw, 24px);
   border:1.5px solid var(--line);border-radius:var(--radius);
   background:#fff;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;
+  overflow:hidden;
 }
 .dl-card:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 12px 32px rgba(79,70,229,0.1)}
+.dl-card .card-screenshot{width:100%;border-radius:12px;overflow:hidden;margin-bottom:clamp(14px, 2vw, 18px);border:1px solid var(--line);box-shadow:0 4px 16px rgba(15,23,42,0.06)}
+.dl-card .card-screenshot img{width:100%;display:block}
 .dl-card .app-icon{width:clamp(48px, 7vw, 60px);aspect-ratio:1;border-radius:16px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(79,70,229,0.2)}
 .dl-card .app-icon svg{width:clamp(24px, 3.5vw, 30px);height:clamp(24px, 3.5vw, 30px);fill:#fff}
 .dl-card h3{font-size:clamp(15px, 2.2vw, 17px);font-weight:800;color:var(--ink);margin-bottom:4px;text-align:center}
@@ -87,7 +90,7 @@ footer .links a{font-size:clamp(12px, 1.8vw, 12.5px);color:var(--ink-4);transiti
 footer .links a:hover{color:var(--brand)}
 footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
 
-@media(max-width:480px){.hub-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.hub-grid{grid-template-columns:1fr;max-width:420px}}
 </style>
 </head>
 <body>
@@ -117,8 +120,8 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
   <div class="container">
     <div class="hub-grid">
       <a href="dl-standalone.html" class="dl-card">
-        <div class="app-icon" style="background:linear-gradient(135deg,#0ea5e9,#2563eb)">
-          <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+        <div class="card-screenshot">
+          <img src="docs/standalone.jpg" alt="冥城应用商店独立版截图">
         </div>
         <h3>冥城应用商店·独立版</h3>
         <div class="meta">独立商店 · 自动更新</div>
@@ -127,8 +130,8 @@ footer .copy{font-size:clamp(11px, 1.7vw, 12px);color:var(--ink-4)}
         </span>
       </a>
       <a href="dl-manager.html" class="dl-card">
-        <div class="app-icon" style="background:linear-gradient(135deg,#6366f1,#2563eb)">
-          <svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        <div class="card-screenshot">
+          <img src="docs/manager.jpg" alt="冥城应用商店应用管家版截图">
         </div>
         <h3>冥城应用商店·应用管家版</h3>
         <div class="meta">车机版 · 最新版本</div>
