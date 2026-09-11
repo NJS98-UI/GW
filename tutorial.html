@@ -220,7 +220,8 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .pw-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px -6px rgba(99,102,241,0.45)}
 .pw-btn:active{transform:translateY(0)}
 @media(max-width:480px){.pw-input{font-size:16px;padding:11px 14px}.pw-btn{padding:11px 18px;font-size:13px}}
-.pw-show{margin-top:20px;padding:14px 18px;border-radius:10px;background:var(--bg2);border:1.5px solid rgba(99,102,241,0.2);font-size:20px;font-weight:700;color:var(--brand);letter-spacing:1px;font-family:'SF Mono','Fira Code',monospace}
+.pw-show{margin-top:20px;padding:14px 18px;border-radius:10px;background:var(--bg2);border:1.5px solid rgba(99,102,241,0.2);font-size:20px;font-weight:700;color:var(--brand);letter-spacing:1px;font-family:'SF Mono','Fira Code',monospace;transition:background .2s,border-color .2s}
+.pw-show:hover{background:rgba(99,102,241,0.06);border-color:rgba(99,102,241,0.3)}
 </style>
 </head>
 <body>
@@ -306,6 +307,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
           <input type="text" id="serialInput" class="pw-input" placeholder="输入序列号后六位" maxlength="6" inputmode="numeric" autocomplete="off">
           <button class="pw-btn" onclick="calcPassword()">计算</button>
         </div>
+        <div class="pw-show" id="pwShow" style="display:none;cursor:pointer" onclick="clearPassword()" title="点击清除重新计算">密码：<span id="pwValue"></span></div>
       </div>
     </article>
   </div>
@@ -456,7 +458,15 @@ function calcPassword(){
   if(!input||!/^\d{1,6}$/.test(input)){return}
   var serial=parseInt(input,10);
   var password=String(serial*802018).slice(-6);
-  inp.value=password;
+  document.getElementById('pwValue').textContent=password;
+  document.getElementById('pwShow').style.display='block';
+  inp.value='';
+}
+function clearPassword(){
+  document.getElementById('pwShow').style.display='none';
+  document.getElementById('pwValue').textContent='';
+  document.getElementById('serialInput').value='';
+  document.getElementById('serialInput').focus();
 }
 document.addEventListener('DOMContentLoaded',function(){
   var inp=document.getElementById('serialInput');
