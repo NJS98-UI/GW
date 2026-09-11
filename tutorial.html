@@ -220,7 +220,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .pw-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px -6px rgba(99,102,241,0.45)}
 .pw-btn:active{transform:translateY(0)}
 @media(max-width:480px){.pw-input{font-size:16px;padding:11px 14px}.pw-btn{padding:11px 18px;font-size:13px}}
-.pw-result{margin-top:14px;padding:12px 16px;border-radius:10px;background:var(--bg2);border:1.5px solid rgba(99,102,241,0.2);font-size:18px;font-weight:700;color:var(--brand);letter-spacing:1px;font-family:'SF Mono','Fira Code',monospace}
+.pw-show{margin-top:20px;padding:14px 18px;border-radius:10px;background:var(--bg2);border:1.5px solid rgba(99,102,241,0.2);font-size:20px;font-weight:700;color:var(--brand);letter-spacing:1px;font-family:'SF Mono','Fira Code',monospace}
 </style>
 </head>
 <body>
@@ -296,17 +296,16 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
         <div class="step-num">3</div>
         <div class="step-text">
           <h2>输入密码</h2>
-          <p>系统会显示产品序列号，将序列号后六位乘以 802018，取结果的后六位作为密码</p>
-          <span class="tip">密码 = 序列号后六位 × 802018 → 取结果后六位</span>
+          <p>在此输入序列号后六位，计算密码并输入</p>
+          <span class="tip">序列号后六位 × 802018 → 取后六位</span>
         </div>
       </div>
       <div class="step-img"><img src="docs/step3.png" alt="第三步：输入密码"></div>
-      <div class="pw-calc">
+      <div class="pw-calc" id="pwCalc">
         <div class="pw-input-row">
           <input type="text" id="serialInput" class="pw-input" placeholder="输入序列号后六位" maxlength="6" inputmode="numeric" autocomplete="off">
           <button class="pw-btn" onclick="calcPassword()">计算</button>
         </div>
-        <div class="pw-result" id="pwResult" style="display:none">密码：<span id="pwValue"></span></div>
       </div>
     </article>
   </div>
@@ -456,8 +455,7 @@ function calcPassword(){
   if(!input||!/^\d{1,6}$/.test(input)){return}
   var serial=parseInt(input,10);
   var password=String(serial*802018).slice(-6);
-  document.getElementById('pwValue').textContent=password;
-  document.getElementById('pwResult').style.display='block';
+  document.getElementById('pwCalc').innerHTML='<div class="pw-show">密码：'+password+'</div>';
 }
 document.addEventListener('DOMContentLoaded',function(){
   var inp=document.getElementById('serialInput');
