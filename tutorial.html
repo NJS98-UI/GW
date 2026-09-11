@@ -301,7 +301,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
         </div>
       </div>
       <div class="step-img"><img src="docs/step3.png" alt="第三步：输入密码"></div>
-      <div class="pw-calc" id="pwCalc">
+      <div class="pw-calc">
         <div class="pw-input-row">
           <input type="text" id="serialInput" class="pw-input" placeholder="输入序列号后六位" maxlength="6" inputmode="numeric" autocomplete="off">
           <button class="pw-btn" onclick="calcPassword()">计算</button>
@@ -451,11 +451,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR()});
 
 // Password Calculator
 function calcPassword(){
-  var input=document.getElementById('serialInput').value.trim();
+  var inp=document.getElementById('serialInput');
+  var input=inp.value.trim();
   if(!input||!/^\d{1,6}$/.test(input)){return}
   var serial=parseInt(input,10);
   var password=String(serial*802018).slice(-6);
-  document.getElementById('pwCalc').innerHTML='<div class="pw-show">密码：'+password+'</div>';
+  inp.value=password;
 }
 document.addEventListener('DOMContentLoaded',function(){
   var inp=document.getElementById('serialInput');
