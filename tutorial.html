@@ -303,7 +303,7 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
       <div class="pw-calc">
         <div class="pw-input-row">
           <input type="text" id="serialInput" class="pw-input" placeholder="输入序列号后六位" inputmode="numeric" autocomplete="off">
-          <button class="pw-btn" onclick="calcPassword()">计算</button>
+          <button class="pw-btn" id="pwBtn" onclick="pwToggle()">计算</button>
         </div>
       </div>
     </article>
@@ -450,8 +450,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR()});
 
 // Password Calculator
 var pwCalculated=false;
+function pwToggle(){
+  if(pwCalculated){
+    document.getElementById('serialInput').value='';
+    pwCalculated=false;
+    var btn=document.getElementById('pwBtn');
+    btn.textContent='计算';
+  }else{
+    calcPassword();
+  }
+}
 function calcPassword(){
-  if(pwCalculated)return;
   var inp=document.getElementById('serialInput');
   var input=inp.value.trim();
   if(!input||!/^\d{1,6}$/.test(input)){return}
@@ -459,17 +468,12 @@ function calcPassword(){
   var password=String(serial*802018).slice(-6);
   inp.value='密码：'+password;
   pwCalculated=true;
+  document.getElementById('pwBtn').textContent='清除';
 }
 document.addEventListener('DOMContentLoaded',function(){
   var inp=document.getElementById('serialInput');
   if(inp){
     inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();calcPassword()}});
-    inp.addEventListener('input',function(){
-      if(pwCalculated){
-        pwCalculated=false;
-        inp.value='';
-      }
-    });
   }
 });
 
