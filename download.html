@@ -148,6 +148,24 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
 .dl-card .dl-note a{color:var(--ink3);font-weight:600;cursor:pointer;transition:color .2s}
 .dl-card .dl-note a:hover{color:var(--brand2)}
 
+/* Feature highlight block */
+.dl-card .card-feature{
+  margin-top:16px;padding:14px 16px;border-radius:var(--radius-xs);
+  background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.18);
+}
+.dl-card .card-feature .cf-title{
+  display:flex;align-items:center;gap:7px;
+  font-size:clamp(13px,1.8vw,14px);font-weight:700;color:#059669;margin-bottom:5px;
+}
+.dl-card .card-feature .cf-title svg{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+.dl-card .card-feature p{font-size:clamp(12px,1.6vw,13px);color:var(--ink3);line-height:1.7;text-align:left}
+.dl-card .card-feature .cf-note{
+  display:inline-flex;align-items:center;gap:5px;margin-top:9px;
+  padding:4px 11px;border-radius:100px;font-size:11.5px;font-weight:600;
+  color:#b45309;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.28);
+}
+.dl-card .card-feature .cf-note svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+
 /* QR Modal — dark overlay + white box */
 .qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(15,23,42,0.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
 .qr-modal.show{display:flex;animation:fadeIn .25s ease}
@@ -243,6 +261,29 @@ nav .links a.active::after{width:14px;left:calc(50% - 7px)}
           下载 APK
         </a>
         <p class="dl-note">手机端安装工具，详见<a href="tutorial.html">安装教程</a></p>
+      </div>
+
+      <div class="dl-card">
+        <div class="card-screenshot">
+          <img src="docs/toolbox.jpg" alt="冥城车机工具箱截图">
+        </div>
+        <h3>冥城车机工具箱</h3>
+        <div class="meta">车机端 · 投屏 / 空调 / 车窗 / 盲区 / 记录仪</div>
+        <a href="https://gh-proxy.com/https://github.com/NJS98-UI/appstore-data/blob/8fe1d414a02376fdec87219818ad8b363fd945a6/apk/%E5%86%A5%E5%9F%8E%E8%BD%A6%E6%9C%BA%E5%B7%A5%E5%85%B7%E7%AE%B1.apk" class="dl-btn" download="冥城车机工具箱.apk" style="background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 32px rgba(16,185,129,0.35),inset 0 1px 0 rgba(255,255,255,0.25)">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          下载 APK
+        </a>
+        <div class="card-feature">
+          <div class="cf-title">
+            <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>
+            记录仪开门语音投屏
+          </div>
+          <p>调用原车360摄像头，打开车门时自动唤醒并语音提醒，画面实时投屏到车机大屏，无需手动操作，上车即可查看影像。</p>
+          <div class="cf-note">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            仅 X70L 车型可用，其他车型请自测
+          </div>
+        </div>
       </div>
 
     </div>
